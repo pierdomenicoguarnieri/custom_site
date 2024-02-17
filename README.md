@@ -2,7 +2,7 @@
 
 ## **Description**
 
-This is just a little personal project in written in php.
+This is just a little personal project written in php.
 
 <!-- ```bash
 npm i vue@next
