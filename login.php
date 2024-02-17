@@ -23,7 +23,13 @@
         $errors = [];
     }
     if(isset($json) && $json->head == true){
-        var_dump($_COOKIE);
+        $cookie_name = $json->body->cookie_name;
+        $date_end = $json->body->date_end;
+        $token = $json->body->token;
+        $cookie = setCustomCookie($cookie_name, $token, strtotime($date_end),'/','localhost');
+        if($cookie == true){
+            header('Location: index.php');
+        }
     }
 ?>
 <?php if(isset($json) && $json->head == false){
