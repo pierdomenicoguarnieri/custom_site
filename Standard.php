@@ -25,6 +25,7 @@ function getApi(string $url, array $data = [], string $method = ''){
     curl_setopt($curl, CURLOPT_CONNECTTIMEOUT , 30);
     curl_setopt($curl, CURLOPT_TIMEOUT, 30);
     curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($curl, CURLOPT_COOKIEFILE, "./tmp/cookie.txt");
     curl_setopt($curl, CURLOPT_ENCODING, "");
     curl_setopt($curl, CURLOPT_AUTOREFERER, true);
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
@@ -78,4 +79,20 @@ function getParams(array $data){
         }
     }
     return $data;
+}
+
+function setCustomCookie(string $name, string $value, string $date,string $path = '/', string $domain = '', $secure = false, $httponly = false){
+    setcookie($name,$value,$date,$path,$domain,$secure,$httponly);
+    if(isset($_COOKIE[$name]) && strlen($_COOKIE[$name]) > 0){
+        return true;
+    }
+    return false;
+}
+
+function unsetCustomCookie(string $name){
+    setcookie($name,null,time()-1);
+    if(isset($_COOKIE[$name]) && $_COOKIE[$name] == null){
+        return true;
+    }
+    return false;
 }

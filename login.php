@@ -23,7 +23,7 @@
         $errors = [];
     }
     if(isset($json) && $json->head == true){
-        var_dump($_COOKIE['ucode']);
+        var_dump($_COOKIE);
     }
 ?>
 <?php if(isset($json) && $json->head == false){
