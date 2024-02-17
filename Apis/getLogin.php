@@ -3,8 +3,6 @@ require_once 'header.php';
 
 $email = isset($params['email']) ? $params['email'] : '';
 $pwd = isset($params['pwd']) ? $params['pwd'] : '';
-$json->email = $email;
-$json->pwd = md5($pwd);
 
 $q = "SELECT * FROM users WHERE email = ? AND pwd = ?";
 $r = DataBase::getResultQueryPrepare($q, 'ss', [$email, md5($pwd)]);
