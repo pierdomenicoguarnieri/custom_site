@@ -52,6 +52,25 @@ function getResult($res,$col=0,$row=0){
     return false;
 }
 
+function getResultPrepare($mysqli, string $query, string $type_params, array $params) {
+    $stmt = $mysqli->prepare($query);
+    if (!$stmt) {
+        return false;
+    }
+    if (!empty($params)) {
+        $stmt->bind_param($type_params, ...$params);
+        if ($stmt->errno) {
+            return false;
+        }
+    }
+    $stmt->execute();
+    if ($stmt->errno) {
+        return false;
+    }
+    $stmt->close();
+    return true;
+}
+
 function getParams(array $data){
     foreach ($data as $key => $value) {
         if(base64_encode(base64_decode($value, true)) === $value){

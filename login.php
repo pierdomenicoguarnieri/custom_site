@@ -66,5 +66,6 @@
             login.style.display = 'block';
             register.style.display = 'none';
         }
+        hideModal()
     }
 </script>
