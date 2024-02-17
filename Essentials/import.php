@@ -25,4 +25,3 @@ include 'autoload.php';
 
 DataBase::$DB_name = DB_NAME;
 DataBase::inizialize();
-$GLOBALS['GENERAL_SETTINGS'] = new Settings();

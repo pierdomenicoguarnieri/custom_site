@@ -4,8 +4,8 @@ require_once 'header.php';
 $email = isset($params['email']) ? $params['email'] : '';
 $pwd = isset($params['pwd']) ? $params['pwd'] : '';
 
-$q = "SELECT * FROM users WHERE email = '$email' AND pwd = '".encryptString(md5($pwd))."'";
-$r = mysqli_query(DataBase::$mysqli, $q);
+$q = "SELECT * FROM users WHERE email = ? AND pwd = ?";
+$r = DataBase::getResultQueryPrepare($q, 'ss', [$email, encryptString(md5($pwd))]);
 if(mysqli_num_rows($r) > 0){
     $id = DataBase::getResult($r, 'id');
     $isAdmin = DataBase::getResult($r, 'is_admin');

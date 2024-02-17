@@ -1,2 +1,2 @@
 <?php
-include 'Settings.php';
+?>

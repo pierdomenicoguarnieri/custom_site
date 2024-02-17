@@ -200,3 +200,57 @@ function encryptString($string,$key=""){
 function decryptString($string,$key=""){
     return xorString(base64_decode($string),$key);
 }
+
+function generateAlpanumericToken($length = 30) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $count = mb_strlen($chars);
+    
+    for ($i = 0, $result = ''; $i < $length; $i++) {
+        $index = rand(0, $count - 1);
+        $result .= mb_substr($chars, $index, 1);
+    }
+    
+    return $result;
+}
+
+function generateNumericToken($length = 30) {
+    $chars = '0123456789';
+    $count = mb_strlen($chars);
+    
+    for ($i = 0, $result = ''; $i < $length; $i++) {
+        $index = rand(0, $count - 1);
+        $result .= mb_substr($chars, $index, 1);
+    }
+    
+    return $result;
+}
+
+function getMonthLong($mese){
+    if(intval($mese)==1)    return "Gennaio";
+    if(intval($mese)==2)    return "Febbraio";
+    if(intval($mese)==3)    return "Marzo";
+    if(intval($mese)==4)    return "Aprile";
+    if(intval($mese)==5)    return "Maggio";
+    if(intval($mese)==6)    return "Giugno";
+    if(intval($mese)==7)    return "Luglio";
+    if(intval($mese)==8)    return "Agosto";
+    if(intval($mese)==9)    return "Settembre";
+    if(intval($mese)==10)   return "Ottobre";
+    if(intval($mese)==11)   return "Novembre";
+    if(intval($mese)==12)   return "Dicembre";
+}
+
+function getMonthShort($mese){
+    if(intval($mese)==1)    return "Gen";
+    if(intval($mese)==2)    return "Feb";
+    if(intval($mese)==3)    return "Mar";
+    if(intval($mese)==4)    return "Apr";
+    if(intval($mese)==5)    return "Mag";
+    if(intval($mese)==6)    return "Giu";
+    if(intval($mese)==7)    return "Lug";
+    if(intval($mese)==8)    return "Ago";
+    if(intval($mese)==9)    return "Set";
+    if(intval($mese)==10)   return "Ott";
+    if(intval($mese)==11)   return "Nov";
+    if(intval($mese)==12)   return "Dic";
+}

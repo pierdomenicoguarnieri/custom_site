@@ -11,16 +11,6 @@ class DataBase
     {
         DataBase::$mysqli = mysqli_connect(DataBase::$DB_host, DataBase::$DB_user, DataBase::$DB_password,DataBase::$DB_name);
         mysqli_set_charset(DataBase::$mysqli,"utf8");
-        
-        // mysqli_query(DataBase::$mysqli, "set global net_buffer_length=1000000;set global max_allowed_packet=1000000000;");
-    }
-    
-    public static function getQuery($q){
-        $r = mysqli_query(DataBase::$mysqli, $q);
-        if($r == false){
-            //Log::Write(mysqli_error(DataBase::$mysqli),"Database");
-        }
-        return $r;
     }
 
     public static function getResult($res,$col=0,$row=0){
@@ -38,7 +28,7 @@ class DataBase
         return false;
     }
 
-    public static function getResultPrepare(string $query, string $type_params, array $params) {
+    public static function executeQueryPrepare(string $query, string $type_params, array $params) {
         $stmt = DataBase::$mysqli->prepare($query);
         if (!$stmt) {
             return false;
@@ -55,6 +45,26 @@ class DataBase
         }
         $stmt->close();
         return true;
+    }
+
+    public static function getResultQueryPrepare(string $query, string $type_params, array $params) {
+        $stmt = mysqli_prepare(DataBase::$mysqli,$query);
+        if (!$stmt) {
+            return false;
+        }
+        if (!empty($params)) {
+            mysqli_stmt_bind_param($stmt,$type_params,...$params);
+            if ($stmt->errno) {
+                return false;
+            }
+        }
+        $result = mysqli_stmt_execute($stmt);
+        if (!$result) {
+            return false;
+        }
+        $result = mysqli_stmt_get_result($stmt);
+        mysqli_stmt_close($stmt);
+        return $result;
     }
     
     public static function getResultArray($res){
