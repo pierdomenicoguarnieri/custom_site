@@ -8,24 +8,23 @@ $pwd = isset($params['pwd']) ? $params['pwd'] : '';
 $pwd2 = isset($params['pwd2']) ? $params['pwd2'] : '';
 $tokenAdmin = isset($params['tokenAdmin']) ? $params['tokenAdmin'] : '';
 
-
 if(strlen($name) > 0 && strlen($surname) > 0 && strlen($email) > 0 && strlen($pwd) > 0 && strlen($pwd2) > 0 && ($pwd == $pwd2)){
     $qSelect = "SELECT * FROM users WHERE email = '$email'";
-    $rSelect = mysqli_query($mysqli, $qSelect);
+    $rSelect = mysqli_query(DataBase::$mysqli, $qSelect);
     if(mysqli_num_rows($rSelect) == 0){
         $isAdmin = 0;
         $qSelectToken = "SELECT * FROM admin_tokens WHERE CONVERT(token USING utf8mb4) = '$tokenAdmin' AND used = 0";
-        $rSelectToken = mysqli_query($mysqli, $qSelectToken);
+        $rSelectToken = mysqli_query(DataBase::$mysqli, $qSelectToken);
         if(mysqli_num_rows($rSelectToken) > 0){
             $isAdmin = 1;
         }
         $qInsert = "INSERT INTO users (name, surname, email, pwd, is_admin) VALUES (?,?,?,?,?)";
-        $rInsert = getResultPrepare($mysqli, $qInsert, 'ssssi', [$name, $surname, $email, md5($pwd), $isAdmin]);
+        $rInsert = DataBase::getResultPrepare($qInsert, 'ssssi', [$name, $surname, $email, encryptString(md5($pwd)), $isAdmin]);
         if($rInsert){
             $json->head = true;
             if(mysqli_num_rows($rSelectToken) > 0){
                 $qUpdateToken = "UPDATE admin_tokens SET used = 1 WHERE CONVERT(token USING utf8mb4) = '$tokenAdmin' AND used = 0";
-                mysqli_query($mysqli, $qUpdateToken);
+                mysqli_query(DataBase::$mysqli, $qUpdateToken);
             }
         }else{
             $json->head = false;

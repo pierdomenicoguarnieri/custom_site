@@ -1,7 +1,4 @@
 <?php
-require 'require.php';
+require 'header.php';
 
-$q = "SELECT id FROM users WHERE name = 'Pierdomenico'";
-$r = mysqli_query($mysqli, $q);
-$id = getResult($r,'id');
-var_dump($id);
+var_dump(encryptString('098f6bcd4621d373cade4e832627b4f6'));
