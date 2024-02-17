@@ -28,7 +28,7 @@
         $token = $json->body->token;
         $cookie = setCustomCookie($cookie_name, $token, strtotime($date_end),'/','localhost');
         if($cookie == true){
-            header('Location: index.php');
+            ?><script>window.location.href="<?php echo DOMAIN.'index.php'; ?>";</script><?php
         }
     }
 ?>

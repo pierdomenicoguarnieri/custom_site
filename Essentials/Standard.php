@@ -48,16 +48,17 @@ function getParams(array $data){
 }
 
 function setCustomCookie(string $name, string $value, string $date,string $path = '/', string $domain = '', $secure = false, $httponly = false){
-    setcookie($name,$value,$date,$path,$domain,$secure,$httponly);
-    if(isset($_COOKIE[$name]) && strlen($_COOKIE[$name]) > 0){
+    $result = setcookie($name,$value,$date,$path,$domain,$secure,$httponly);
+    if($result || (isset($_COOKIE[$name]) && strlen($_COOKIE[$name]) > 0)){
         return true;
     }
     return false;
 }
 
 function unsetCustomCookie(string $name){
-    setcookie($name,null,time()-1);
-    if(isset($_COOKIE[$name]) && $_COOKIE[$name] == null){
+    unset($_COOKIE[$name]); 
+    setcookie($name,'',time()-1,'/');
+    if(!isset($_COOKIE[$name])){
         return true;
     }
     return false;

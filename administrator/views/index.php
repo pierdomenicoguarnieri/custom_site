@@ -1,5 +1,5 @@
-<?php
+<h1>Administaror</h1>
 
-?>
+<h2>Benvenuto <?php echo $GLOBALS['CURRENT_USER']->nome ?></h2>
 
-<h1>Admin</h1>
+<a href="<?php echo DOMAIN ?>logout.php">logout</a>

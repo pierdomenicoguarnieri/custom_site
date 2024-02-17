@@ -6,15 +6,17 @@ if(isset($_GET['debug']) && intval($_GET['debug'])==1){
 
 set_time_limit(5);
 date_default_timezone_set('Europe/Rome');
-define("BASEPATH", str_replace("WebService", "", __DIR__));
+define("BASEPATH", str_replace("Essentials", "", __DIR__));
 define('DB_NAME', 'framework');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PWD', '');
 define('VERSION', "1.0.0");
-define('DOMAIN', "https://localhost/gestionale/");
+define('DOMAIN', "http://localhost/Programmazione/PHP/Framework/");
 define('ADMINPATH', "administrator/");
+define('USERPATH', "guest/");
 define('ADMINURL', DOMAIN.ADMINPATH);
+define('USERURL', DOMAIN.USERPATH);
 
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $basename = basename($_SERVER['PHP_SELF']);
