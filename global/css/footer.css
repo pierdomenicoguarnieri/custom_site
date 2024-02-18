@@ -4,7 +4,8 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
-    span{
-        font-size: 30px;
-    }
+}
+
+footer span{
+    font-size: 30px;
 }

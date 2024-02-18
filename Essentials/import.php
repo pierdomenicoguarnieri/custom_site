@@ -1,6 +1,9 @@
 <?php
 if(isset($_GET['debug']) && intval($_GET['debug'])==1){
-    error_reporting(E_ALL);
+    error_reporting(E_ALL & ~E_NOTICE);
+    ini_set('display_errors', 1); 
+}else{
+    error_reporting(E_ERROR);
     ini_set('display_errors', 1); 
 }
 
@@ -15,8 +18,10 @@ define('VERSION', "1.0.0");
 define('DOMAIN', "http://localhost/Programmazione/PHP/Framework/");
 define('ADMINPATH', "administrator/");
 define('USERPATH', "guest/");
+define('GLOBALPATH', "global/");
 define('ADMINURL', DOMAIN.ADMINPATH);
 define('USERURL', DOMAIN.USERPATH);
+define('GLOBALURL', DOMAIN.GLOBALPATH);
 
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $basename = basename($_SERVER['PHP_SELF']);

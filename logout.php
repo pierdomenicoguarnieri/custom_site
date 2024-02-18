@@ -1,5 +1,6 @@
 <?php
-require 'header.php';
+require 'require.php';
+
 if((isset($_COOKIE['ucode']) && strlen($_COOKIE['ucode']) > 0 && $_COOKIE['ucode'] != null) || (isset($_COOKIE['acode']) && strlen($_COOKIE['acode']) > 0 && $_COOKIE['acode'] != null)){
     $cookie_name = '';
     if(isset($_COOKIE['ucode']) && strlen($_COOKIE['ucode']) > 0 && $_COOKIE['ucode'] != null){

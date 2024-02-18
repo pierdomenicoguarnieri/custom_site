@@ -1,4 +1,5 @@
 <?php
+    require 'require.php';
 
     if(isset($_POST['login'])){
         $email = $_POST['email'];
@@ -41,7 +42,7 @@
     }else{
         array_push($errors,$json->errors);
     }
-    require './partials/modal_errors.php';
+    require GLOBALPATH.'layouts/partials/modal_errors.php';
 } ?>
 <div id="login-div">
     <h1>Login</h1>

@@ -3,19 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php require_once './administrator/controller/css_include.php'; ?>
+        <?php require_once ADMINPATH.'controller/css_include.php'; ?>
         <title><?php echo '' ?></title>
     </head>
     <body>
         <div class="pg-content-wrapper">
-            <?php require_once './administrator/layouts/partials/header.php' ?>
+            <?php require_once ADMINPATH.'layouts/partials/header.php' ?>
             <main>
-                <?php require_once './administrator/layouts/partials/aside.php' ?>
+                <?php require_once ADMINPATH.'layouts/partials/aside.php' ?>
                 <div class="pg-page-wrapper">
-                    <?php require_once './administrator/views/'.$_GET['page'].'.php' ?>
+                    <?php require_once ADMINPATH.'views/'.$_GET['page'].'.php' ?>
                 </div>
             </main>
-            <?php require_once './administrator/layouts/partials/footer.php' ?>
+            <?php require_once ADMINPATH.'layouts/partials/footer.php' ?>
         </div>
     </body>
 </html>
