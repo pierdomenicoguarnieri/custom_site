@@ -33,17 +33,6 @@
         }
     }
 ?>
-<?php if(isset($json) && $json->head == false){
-    $title = 'Errore Login!';
-    if(is_array($json->errors)){
-        foreach ($json->errors as $error) {
-            array_push($errors,$error);
-        }
-    }else{
-        array_push($errors,$json->errors);
-    }
-    require GLOBALPATH.'layouts/partials/modal_errors.php';
-} ?>
 <style>
     *, html {
         margin:0;
@@ -59,7 +48,18 @@
         <title>Document</title>
     </head>
     <body>    
-        <main style="height:100vh;width:100vw;background-color:gray;display:flex;align-items:center;justify-content:center;position:relative;">
+        <main style="height:100vh;width:100vw;background-color:gray;display:flex;align-items:center;justify-content:center;position:relative;flex-direction:column;">
+        <?php if(isset($json) && $json->head == false){
+            $title = 'Errore Login!';
+            if(is_array($json->errors)){
+                foreach ($json->errors as $error) {
+                    array_push($errors,$error);
+                }
+            }else{
+                array_push($errors,$json->errors);
+            }
+            require GLOBALPATH.'layouts/partials/modal_errors.php';
+        } ?>
             <div style="position:absolute;top:0;left:20px;height:50px;width:50px;display:flex;align-items:center;justify-content:center;">
                 <a href="<?php echo DOMAIN.'index.php'?>" style="text-decoration:none;color:black;font-size:40px;font-weight:800;">&#8592;</a>
             </div>

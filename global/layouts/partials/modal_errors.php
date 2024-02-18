@@ -1,12 +1,13 @@
 <style>
 #modal-error{
     display: flex;
-    border: 2px solid grey;
+    border: 2px solid black;
     width: 30%;
     align-items: center;
     border-radius: 5px;
     flex-direction: column;
     margin-bottom: 20px;
+    background-color: white;
     span{
         color: red;
         margin-bottom: 20px;
