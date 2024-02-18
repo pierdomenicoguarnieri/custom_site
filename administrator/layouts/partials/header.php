@@ -1,11 +1,11 @@
-<header style="height:80px;display:flex;justify-content:space-between;background-color:blue;">
-    <div style="margin-left:15px;">
+<header>
+    <div class="pg-left-div">
         <h1>Administaror</h1>
     </div>
-    <div style="display:flex;align-items:center;justify-content:space-around;width:300px;">
+    <div class="pg-right-div">
         <h2><?php echo $GLOBALS['CURRENT_USER']->nome ?></h2>
         <button>
-            <a href="<?php echo DOMAIN ?>logout.php" style="text-decoration:none;color:black;">LOGOUT</a>
+            <a href="<?php echo DOMAIN ?>logout.php" class="pg-logout">LOGOUT</a>
         </button>
     </div>
 </header>

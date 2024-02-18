@@ -3,15 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <?php require_once './administrator/controller/css_include.php'; ?>
         <title><?php echo '' ?></title>
     </head>
-    <body style="margin:0;padding:0;box-sizing:border-box;">
-        <div style="display:flex;flex-direction:column;height:100vh;">
+    <body>
+        <div class="pg-content-wrapper">
             <?php require_once './administrator/layouts/partials/header.php' ?>
-            <div style="height:calc(100vh - 130px);display:flex">
+            <main>
                 <?php require_once './administrator/layouts/partials/aside.php' ?>
-                <?php require_once './administrator/views/'.$_GET['page'].'.php' ?>
-            </div>
+                <div class="pg-page-wrapper">
+                    <?php require_once './administrator/views/'.$_GET['page'].'.php' ?>
+                </div>
+            </main>
             <?php require_once './administrator/layouts/partials/footer.php' ?>
         </div>
     </body>
