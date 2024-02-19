@@ -19,9 +19,11 @@ define('DOMAIN', "http://localhost/Programmazione/PHP/Framework/");
 define('ADMINPATH', "administrator/");
 define('USERPATH', "guest/");
 define('GLOBALPATH', "global/");
+define('ASSETSPATH', "assets/");
 define('ADMINURL', DOMAIN.ADMINPATH);
 define('USERURL', DOMAIN.USERPATH);
 define('GLOBALURL', DOMAIN.GLOBALPATH);
+define('ASSETSURL', DOMAIN.ASSETSPATH);
 
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $basename = basename($_SERVER['PHP_SELF']);

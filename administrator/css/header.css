@@ -7,6 +7,17 @@ header{
 
 header .pg-left-div{
     margin-left: 15px;
+    width: 50%;
+    a{
+        height: 100%;
+        display: inline-block;
+        aspect-ratio: 1 / 1;
+        img{
+            height: 100%;
+            width: 100%;
+            filter: invert(100%);
+        }
+    }
 }
 
 header .pg-right-div{

@@ -3,32 +3,64 @@ header{
     height: 80px;
     display: flex;
     justify-content: space-between;
-}
-
-header .pg-left-div{
-    margin-left: 15px;
-}
-
-header .pg-right-div{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 300px;
-}
-
-header .pg-right-div button{
-    background-color: rgba(56, 187, 16, 0.6);
-    border: 2px solid transparent;
-    border-radius: 5px;
-    box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, .2);
-    transition: all .3s;
-}
-
-header .pg-right-div button:hover{
-    background-color: rgb(56, 187, 16);
-}
-
-header .pg-right-div .pg-login{
-    text-decoration: none;
-    color: black;
+    .pg-left-div{
+        width: 50%;
+        margin-left: 15px;
+        a{
+            height: 100%;
+            display: inline-block;
+            aspect-ratio: 1 / 1;
+            img{
+            height: 100%;
+            width: 100%;
+            }
+        }
+    }
+    .pg-right-div{
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 50%;
+        .pg-nav-wrapper{
+            width: 500px;
+            min-width: 400px;
+            display: flex;
+            justify-content: space-around;
+            .pg-button-wrapper{
+                display: flex;
+                align-items: center;
+                button{
+                    background-color: rgba(56, 187, 16, 0.6);
+                    border: 2px solid transparent;
+                    border-radius: 5px;
+                    box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, .2);
+                    transition: all .3s;
+                }
+                button:hover{
+                    background-color: rgb(56, 187, 16);
+                }
+            }
+            .pg-login{
+                text-decoration: none;
+                color: black;
+            }
+            nav{
+                width: 300px;
+                ul{
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-between;
+                    a{
+                        text-decoration: none;
+                        color: black;
+                        transition: all .3s;
+                    }
+                    a:hover{
+                        text-decoration: underline;
+                        color: rgba(0, 0, 0, .8);
+                    }
+                }
+            }
+        }
+    }
 }

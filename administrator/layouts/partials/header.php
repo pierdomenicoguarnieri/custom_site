@@ -1,6 +1,8 @@
 <header>
     <div class="pg-left-div">
-        <h1>Administaror</h1>
+        <a href="<?php echo DOMAIN.'?page=index' ?>">
+            <img src="<?php echo ASSETSPATH.'img/logo.png' ?>" alt="">
+        </a>
     </div>
     <div class="pg-right-div">
         <h2><?php echo $GLOBALS['CURRENT_USER']->nome ?></h2>
