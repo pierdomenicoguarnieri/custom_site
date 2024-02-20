@@ -15,7 +15,7 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PWD', '');
 define('VERSION', "1.0.0");
-define('DOMAIN', "http://localhost/Programmazione/PHP/Framework/");
+define('DOMAIN', "http://localhost/Programmazione/PHP/Framework/custom_site/");
 define('ADMINPATH', "administrator/");
 define('USERPATH', "guest/");
 define('GLOBALPATH', "global/");
