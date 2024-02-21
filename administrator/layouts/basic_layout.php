@@ -12,7 +12,7 @@
             <main>
                 <?php require_once ADMINPATH.'layouts/partials/aside.php' ?>
                 <div class="pg-page-wrapper">
-                    <?php require_once ADMINPATH.'controller/routing_controller.php' ?>
+                    <?php require_once ESSENTIALSPATH.'Routing/routing_controller.php' ?>
                 </div>
             </main>
             <?php require_once ADMINPATH.'layouts/partials/footer.php' ?>

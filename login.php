@@ -30,7 +30,7 @@
             $token = $json->body->token;
             $cookie = setCustomCookie($cookie_name, $token, strtotime($date_end),'/','localhost');
             if($cookie == true){
-                ?><script>window.location.href="<?php echo DOMAIN.'?page=index'; ?>";</script><?php
+                ?><script>window.location.href="<?php echo DOMAIN; ?>";</script><?php
             }
         }
     }

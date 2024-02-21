@@ -1,6 +1,6 @@
 <header>
     <div class="pg-left-div">
-        <a href="<?php echo DOMAIN.'?page=index' ?>">
+        <a href="<?php echo DOMAIN ?>">
             <img src="<?php echo ASSETSPATH.'img/logo.png' ?>" alt="">
         </a>
     </div>
