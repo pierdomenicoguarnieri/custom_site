@@ -1,0 +1,1 @@
+ErrorDocument 404 <script>window.location.href="http://localhost/Programmazione/PHP/Framework/404.php";</script>
