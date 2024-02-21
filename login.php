@@ -62,7 +62,7 @@
             require GLOBALPATH.'layouts/partials/modal_errors.php';
         } ?>
             <div style="position:absolute;top:0;left:20px;height:50px;width:50px;display:flex;align-items:center;justify-content:center;">
-                <a href="<?php echo DOMAIN.'index.php'?>" style="text-decoration:none;color:black;font-size:40px;font-weight:800;">&#8592;</a>
+                <a href="<?php echo DOMAIN; ?>" style="text-decoration:none;color:black;font-size:40px;font-weight:800;">&#8592;</a>
             </div>
             <div id="login-div" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
                 <h1 style="margin-bottom:20px;">Login</h1>

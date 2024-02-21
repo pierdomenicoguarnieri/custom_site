@@ -6,13 +6,16 @@
     }else{
         $path = GLOBALPATH;
     }
-    
+
     $files_views = scandir($path."views");
     $flag = false;
     $page = isset($_GET['page']) ? $_GET['page'] : 'index';
+
+    require_once ESSENTIALSPATH.'Routing/custom_routes.php';
+
     if($page != '.' && $page != '..' && strlen($page) > 0){
         if(in_array($page.'.php',$files_views)){
-            require_once $path.'views/'.$file.'.php';
+            require_once $path.'views/'.$page.'.php';
             $flag = true;
         }
     }

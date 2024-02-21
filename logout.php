@@ -11,7 +11,7 @@ if((isset($_COOKIE['ucode']) && strlen($_COOKIE['ucode']) > 0 && $_COOKIE['ucode
     if(strlen($cookie_name) > 0){
         $cookie = unsetCustomCookie($cookie_name);
         if($cookie == true){
-            ?><script>window.location.href="<?php echo DOMAIN.'index.php'; ?>";</script><?php
+            ?><script>window.location.href="<?php echo DOMAIN; ?>";</script><?php
         }
     }
 }
