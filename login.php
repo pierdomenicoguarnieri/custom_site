@@ -63,30 +63,34 @@
                 <h1 style="margin-bottom:20px;">Login</h1>
                 <form action="" method="POST" style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:10px;">
                     <label for="email">Email</label>
-                    <input type="text" name="email" style="margin-bottom:10px;" placeholder="Inserisci la tua email">
+                    <input type="text" name="email" class="form-input" placeholder="Inserisci la tua email">
                     <label for="email">Password</label>
-                    <input type="password" name="pwd" style="margin-bottom:10px;" placeholder="Inserisci la tua password">
-                    <button type="submit" name="login">Accedi</button>
+                    <input type="password" name="pwd" class="form-input" placeholder="Inserisci la tua password">
+                    <div style="width:100%;display: flex;justify-content:space-around;">
+                        <button type="submit" class="btn btn-confirm" name="login">Accedi</button>
+                        <button class="btn btn-danger" id="register-link" type="button" onclick="showRegister(false)">Registrati</button>
+                    </div>
                 </form>
-                <span style="color: blue;text-decoration:underline;cursor:pointer" id="register-link" onclick="showRegister(false)">Non sei registrato? Registrati!</span>
             </div>
             
             <div id="register-div" style="display:none;flex-direction:column;align-items:center;justify-content:center;">
                 <h1 style="margin-bottom:20px;">Register</h1>
                 <form action="" method="POST" style="display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:10px;">
                     <label for="nome">Nome</label>
-                    <input type="text" name="name" style="margin-bottom:10px;" placeholder="Inserisci il tuo nome">
+                    <input type="text" name="name" class="form-input" placeholder="Inserisci il tuo nome">
                     <label for="surname">Cognome</label>
-                    <input type="text" name="surname" style="margin-bottom:10px;" placeholder="Inserisci il tuo cognome">
+                    <input type="text" name="surname" class="form-input" placeholder="Inserisci il tuo cognome">
                     <label for="email">Email</label>
-                    <input type="text" name="email" style="margin-bottom:10px;" placeholder="Inserisci la tua email">
+                    <input type="text" name="email" class="form-input" placeholder="Inserisci la tua email">
                     <label for="pwd">Password</label>
-                    <input type="password" name="pwd" style="margin-bottom:10px;" placeholder="Inserisci la tua password">
+                    <input type="password" name="pwd" class="form-input" placeholder="Inserisci la tua password">
                     <label for="pwd2">Conferma Password</label>
-                    <input type="password" name="pwd2" style="margin-bottom:10px;" placeholder="Conferma la tua password">
-                    <button type="submit" name="register">Registrati</button>
+                    <input type="password" name="pwd2" class="form-input" placeholder="Conferma la tua password">
+                    <div style="width:100%;display: flex;justify-content:space-around;">
+                        <button type="submit" class="btn btn-confirm" name="register">Registrati</button>
+                        <button class="btn btn-danger" id="register-link" type="button" onclick="showRegister(true)">Accedi</button>
+                    </div>
                 </form>
-                <span style="color: blue;text-decoration:underline;cursor:pointer" id="register-link" onclick="showRegister(true)">Sei già registrato? Fai il login!</span>
             </div>
         </main>
     </body>

@@ -1,0 +1,28 @@
+.form-input{
+    background: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50px;
+    transition: all .3s;
+    outline: 1px solid var(--secondary-color-light);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    min-width: 300px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-input::placeholder{
+    color: var(--secondary-color);
+    font-style: italic;
+    text-align: center;
+    opacity: 50%;
+    transition: opacity 0.3s ease;
+}
+
+.form-input:focus, .form-input:focus-visible, .form-input:focus-within{
+    outline: 1px solid var(--secondary-color) !important;
+}
+
+.form-input:focus::placeholder, .form-input:focus-visible::placeholder, .form-input:focus-within::placeholder{
+    opacity: 0%;
+}

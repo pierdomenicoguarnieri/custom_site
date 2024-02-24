@@ -4,6 +4,12 @@
     --primary-color-dark: #F2F2F2;
     --secondary-color: #111111;
     --secondary-color-light: #666666;
+    --confirm-color: #24b817;
+    --confirm-color-light: #38c42b;
+    --confirm-color-dark: #138309;
+    --danger-color: #dfc800;
+    --danger-color-light: #f3e744;
+    --danger-color-dark: #dac510;
 
     /* Font Sizes */
     --fs-small: 14px;

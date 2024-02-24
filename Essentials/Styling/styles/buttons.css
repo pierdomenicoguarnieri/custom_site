@@ -1,0 +1,33 @@
+.btn{
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+    margin-top: 5px;
+    margin-bottom: 5px;
+    transition: all .3s;
+}
+
+.btn.btn-confirm{
+    background-color: var(--confirm-color);
+    color: var(--primary-color);
+}
+
+.btn.btn-danger{
+    background-color: var(--danger-color);
+    color: var(--secondary-color);
+}
+
+.btn:hover{
+    background-color: var(--primary-color-dark);
+}
+
+.btn.btn-confirm:hover{
+    background-color: var(--confirm-color-light);
+}
+
+.btn.btn-danger:hover{
+    background-color: var(--danger-color-light);
+}
