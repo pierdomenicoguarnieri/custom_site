@@ -1,0 +1,16 @@
+@font-face {
+  font-family: 'OpenSans';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../fonts/open_sans/OpenSans-Regular.ttf');
+  font-display: swap;
+}
+
+
+body { 
+  font-family: "OpenSans", sans-serif !important; 
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-weight: --fw-bold !important;
+}

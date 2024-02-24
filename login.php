@@ -35,18 +35,13 @@
         }
     }
 ?>
-<style>
-    *, html {
-        margin:0;
-        padding:0;  
-    }
-</style>
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <?php require_once ESSENTIALSPATH.'Styling/css_include.php'; ?>
     </head>
     <body>    
         <main style="height:100vh;width:100vw;background-color:gray;display:flex;align-items:center;justify-content:center;position:relative;flex-direction:column;">

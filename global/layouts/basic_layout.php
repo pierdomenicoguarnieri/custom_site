@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <?php require_once GLOBALPATH.'controller/css_include.php'; ?>
+        <?php require_once ESSENTIALSPATH.'Styling/css_include.php'; ?>
         <title><?php echo '' ?></title>
     </head>
     <body>

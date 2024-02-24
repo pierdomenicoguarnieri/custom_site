@@ -1,0 +1,33 @@
+:root{
+    /* Color Palatte */
+    --primary-color: #FFFFFF;
+    --primary-color-dark: #F2F2F2;
+    --secondary-color: #111111;
+    --secondary-color-light: #666666;
+
+    /* Font Sizes */
+    --fs-small: 14px;
+    --fs-medium: 24px;
+    --fs-large: 32px;
+    --fs-x-large: 40px;
+    --fs-x-larger: 42px;
+    
+    /* Font Spacing */
+    --spacing-10: 0.22rem;
+    --spacing-20: 0.44rem;
+    --spacing-30: 0.67rem;
+    --spacing-40: 1rem;
+    --spacing-50: 1.5rem;
+    --spacing-60: 2.25rem;
+    --spacing-70: 3.38rem;
+    --spacing-80: 5.06rem;
+    
+    /* Font Weight */
+    --fw-xx-thin: 100;
+    --fw-x-thin: 200;
+    --fw-thin: 300;
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-semi-bold: 600;
+    --fw-bold: 700;
+}
