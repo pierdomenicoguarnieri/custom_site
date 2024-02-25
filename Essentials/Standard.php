@@ -254,4 +254,12 @@ function getMonthShort($mese){
     if(intval($mese)==10)   return "Ott";
     if(intval($mese)==11)   return "Nov";
     if(intval($mese)==12)   return "Dic";
+} 
+
+function EnscapeSQL($str){
+    return str_replace("'","''",$str);
+} 
+
+function UnscapeSQL($str){
+    return str_replace("''","",$str);
 }

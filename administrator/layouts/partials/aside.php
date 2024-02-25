@@ -30,7 +30,9 @@
                 </ul>
             </li>
             <li>
-                <span>Link</span>
+                <a href="<?php echo DOMAIN.'?page=obj&objects=User' ?>">
+                    <span>Utenti <i class="fa fa-user"></i></span>
+                </a>
             </li>
             <li>
                 <span>Link</span>

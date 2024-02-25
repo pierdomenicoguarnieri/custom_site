@@ -5,6 +5,9 @@ switch ($path) {
             case 'test':
                 $page = 'index';
                 break;
+            case 'obj':
+                $page = 'object_manager';
+                break;
             default:
                 break;
         }
