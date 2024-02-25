@@ -78,6 +78,14 @@ class DataBase
         return str_replace("''","",$str);
     }
 
+    public static function getQuery($q){
+        $r = mysqli_query(DataBase::$mysqli, $q);
+        if($r == false){
+            //Log::Write(mysqli_error(DBConnect::$mysqli),"Database");
+        }
+        return $r;
+    }
+
     public static function getSearchString($name,$type,$value="",$type_sql = "text"){
         $value = ( ($type_sql == "data" && strlen($value) == 10) ? data_ita_eng($value) : $value );
         $value = ( ($type_sql == "datatime" && strlen($value) >= 10) ? data_ita_eng($value) : $value );

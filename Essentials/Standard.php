@@ -263,3 +263,80 @@ function EnscapeSQL($str){
 function UnscapeSQL($str){
     return str_replace("''","",$str);
 }
+
+function removeLastChars($str,$num = 1){
+    if(strlen($str) > $num){
+        return substr($str, 0, strlen($str)-$num);
+    }else{
+        return "";
+    }
+}
+
+function removeFirstChars($str,$num = 1){
+    return substr($str, $num, strlen($str)-$num);
+}
+
+function getCurrentLoggedUser($scode){
+    $session = new SessionsOBJ();
+    $session->select(array("code = '".$scode."'"))->load();
+    $session = $session->get();
+    $cod_user = $session->cod_user;
+    $user = new UserOBJ();
+    
+    if(isset($cod_user) && intval($cod_user)>0){
+        $user->select($cod_user)->load();
+        return $user->get();
+    }else{
+        return null;
+    }
+    
+}
+
+function generateToken($num = 0){
+    $num = $num == 0 ? 16 : $num;
+    return bin2hex(random_bytes($num));
+}
+
+function data_ita_eng($data){
+    if(strlen($data)>0){
+        if(strpos($data, "/")){
+            $explode = explode("/", $data);
+            if(count($explode)==3){
+                return $explode[2]."-".$explode[1]."-".$explode[0];
+            }else{
+                return date('Y-m-d');
+            }
+        }else{
+            $explode = explode("-", $data);
+            if(count($explode)==3){
+                return $data;
+            }else{
+                return date('Y-m-d');
+            }
+        }
+    }else{
+        return date('Y-m-d');
+    }
+}
+
+function data_eng_ita($data){
+    if(strlen($data)>0){
+        if(strpos($data, "-")){
+            $explode = explode("-", $data);
+            if(count($explode)==3){
+                return $explode[2]."/".$explode[1]."/".$explode[0];
+            }else{
+                return date('d/m/Y');
+            }
+        }else{
+            $explode = explode("/", $data);
+            if(count($explode)==3){
+                return $data;
+            }else{
+                return date('d/m/Y');
+            }
+        }
+    }else{
+        return date('d/m/Y');
+    }
+}

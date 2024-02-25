@@ -9,28 +9,14 @@ $r = DataBase::getResultQueryPrepare($q, 'ss', [$email, md5($pwd)]);
 if(mysqli_num_rows($r) > 0){
     $id = DataBase::getResult($r, 'id');
     $isAdmin = intval(DataBase::getResult($r, 'is_admin'));
-    $token = bin2hex(random_bytes(16));
-    $date_start = date('Y-m-d H:i:s');
-    $date_end = date('Y-m-d H:i:s', strtotime($date_start.' + 6 hours'));
     $cookie_name = $isAdmin == 1 ? 'acode' : 'ucode';
-    $qSelect = "SELECT * FROM sessions_users WHERE id_user = '$id'";
-    $rSelect = mysqli_query(DataBase::$mysqli, $qSelect);
-    if(mysqli_num_rows($rSelect)){
-        $qSession = "UPDATE sessions_users SET token = '$token', session_start = '$date_start', session_end = '$date_end' WHERE id_user = '$id'";
-    }else{
-        $qSession = "INSERT INTO sessions_users (id_user, token, session_start, session_end) VALUES ('$id','$token', '$date_start', '$date_end')";
-    }
-    $rSession = mysqli_query(DataBase::$mysqli, $qSession);
-    if($rSession){
-        $json->head = true;
-        $json->body = new stdClass();
-        $json->body->cookie_name = $cookie_name;
-        $json->body->date_end = $date_end;
-        $json->body->token = $token;
-    }else{
-        $json->head = false;
-        $json->errors = 'Errore durante il login. Riprovare.';
-    }
+    $sessionOBJ = new SessionsOBJ();
+    $session = $sessionOBJ->set(['id_user' => $id]);
+    $json->head = true;
+    $json->body = new stdClass();
+    $json->body->cookie_name = $cookie_name;
+    $json->body->date_end = $session['session_end'];
+    $json->body->token = $session['token'];
 }else{
     $json->head = false;
     $json->errors = 'Credenziali errate! Email o Password non corrette.';

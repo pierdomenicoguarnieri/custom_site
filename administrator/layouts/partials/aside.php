@@ -31,7 +31,7 @@
             </li>
             <li>
                 <a href="<?php echo DOMAIN.'?page=obj&objects=User' ?>">
-                    <span>Utenti <i class="fa fa-user"></i></span>
+                    <span><i class="fa fa-user"></i> Utenti</span>
                 </a>
             </li>
             <li>
