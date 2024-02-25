@@ -45,17 +45,17 @@
     </head>
     <body>    
         <main style="height:100vh;width:100vw;background-color:gray;display:flex;align-items:center;justify-content:center;position:relative;flex-direction:column;">
-        <?php if(isset($json) && $json->head == false){
-            $title = 'Errore Login!';
-            if(is_array($json->errors)){
-                foreach ($json->errors as $error) {
-                    array_push($errors,$error);
+            <?php if(isset($json) && $json->head == false){
+                $title = 'Errore Login!';
+                if(is_array($json->errors)){
+                    foreach ($json->errors as $error) {
+                        array_push($errors,$error);
+                    }
+                }else{
+                    array_push($errors,$json->errors);
                 }
-            }else{
-                array_push($errors,$json->errors);
-            }
-            require GLOBALPATH.'layouts/partials/modal_errors.php';
-        } ?>
+                require GLOBALPATH.'layouts/partials/modal_errors.php';
+            } ?>
             <div style="position:absolute;top:0;left:20px;height:50px;width:50px;display:flex;align-items:center;justify-content:center;">
                 <a href="<?php echo DOMAIN; ?>" style="text-decoration:none;color:black;font-size:40px;font-weight:800;">&#8592;</a>
             </div>
@@ -95,18 +95,4 @@
         </main>
     </body>
 </html>
-
-<script>
-    function showRegister(flag){
-        login = document.getElementById('login-div')
-        register = document.getElementById('register-div')
-        if(flag == false){
-            register.style.display = 'flex';
-            login.style.display = 'none';
-        }else{
-            login.style.display = 'flex';
-            register.style.display = 'none';
-        }
-        hideModal()
-    }
-</script>
+<?php require_once ESSENTIALSPATH.'JavaScript/javascript_include.php'; ?>

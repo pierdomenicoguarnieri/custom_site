@@ -1,7 +1,9 @@
 .pg-index-div{
-    background: cyan;
+    background-color: var(--primary-color);
     height: 100%;
     width: 100%;
     overflow-y: scroll;
-    padding: 10px 20px
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
 }

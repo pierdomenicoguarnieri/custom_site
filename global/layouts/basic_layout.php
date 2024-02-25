@@ -18,3 +18,4 @@
         </div>
     </body>
 </html>
+<?php require_once ESSENTIALSPATH.'JavaScript/javascript_include.php'; ?>
