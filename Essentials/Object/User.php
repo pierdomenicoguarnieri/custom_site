@@ -32,7 +32,7 @@ class UserOBJ extends DBObject
         $where = [
             (object)[]
         ];
-        $viewObj->datas = $this->getData($this->table,$viewObj->fields,$replace,[]);
+        $viewObj->datas = $this->getData($this->table,$viewObj->fields,$replace,"");
         return $viewObj;
     }
 

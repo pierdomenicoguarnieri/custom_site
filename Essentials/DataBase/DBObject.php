@@ -226,7 +226,7 @@ class DBObject extends stdClass
         }
     }
 
-    public static function getData($table,$fields,$replace_list,$where_conditions){
+    public static function getData($table,$fields,$replace_list = [],$where_conditions = ""){
         $q = "SELECT ";
         foreach ($fields as $key => $field){
             if(isset($replace_list[$field->name])){
@@ -244,7 +244,9 @@ class DBObject extends stdClass
                 $q .= " ";
             }
         }
-        
+        if(strlen($where_conditions) > 0){
+            $q .= " ".$where_conditions." ";
+        }
         $q .= "FROM $table LIMIT 600";
         $r = mysqli_query(DataBase::$mysqli, $q);
         if(mysqli_num_rows($r) > 0){

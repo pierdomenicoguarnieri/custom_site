@@ -5,7 +5,7 @@
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
         $params = array('email' => $email, 'pwd' => $pwd);
-        $json = json_decode(getApi('http://localhost/Programmazione/PHP/Framework/Apis/getLogin.php', $params, 'GET'));
+        $json = json_decode(getApi(DOMAIN.'Apis/getLogin.php', $params, 'GET'));
         $errors = [];
     }
 
@@ -16,7 +16,7 @@
         $pwd = $_POST['pwd'];
         $pwd2 = $_POST['pwd2'];
         $params = array('name' => $name, 'surname' => $surname, 'email' => $email, 'pwd' => $pwd, 'pwd2' => $pwd2);
-        $url = 'http://localhost/Programmazione/PHP/Framework/Apis/getRegister.php';
+        $url = DOMAIN.'Apis/getRegister.php';
         if(isset($_REQUEST['token']) && strlen($_REQUEST['token']) > 0){
             $url .= '?tokenAdmin='.base64_encode($_REQUEST['token']);
         }
