@@ -226,28 +226,70 @@ class DBObject extends stdClass
         }
     }
 
-    public static function getData($table,$fields,$replace_list = [],$where_conditions = ""){
-        $q = "SELECT ";
-        foreach ($fields as $key => $field){
-            if(isset($replace_list[$field->name])){
-                $field = rtrim($replace_list[$field->name]);
-                if(substr($field, -1) == ','){
-                    $field = substr($field, 0, -1);
+    public static function getData($q_in = "",$table,$fields,$replace_list = [],$where_conditions = [], $group_by = [], $order_by = [], $limit = ""){
+        if(strlen($q_in) == 0){
+            $q = "SELECT ";
+            foreach ($fields as $key => $field){
+                if(isset($replace_list[$field->name])){
+                    $field = rtrim($replace_list[$field->name]);
+                    if(substr($field, -1) == ','){
+                        $field = substr($field, 0, -1);
+                    }
+                    $q .= $field;
+                }else{
+                    $q .= " $field->name";
                 }
-                $q .= $field;
-            }else{
-                $q .= " $field->name";
+                if($key != count($fields) - 1){
+                    $q .= ", ";
+                }else{
+                    $q .= " ";
+                }
             }
-            if($key != count($fields) - 1){
-                $q .= ", ";
-            }else{
-                $q .= " ";
+            $q .= " FROM $table ";
+            if(count($where_conditions) > 0){
+                $q .= " WHERE ";
+                foreach($where_conditions as $key => $condition){
+                    if(is_array($condition)){
+                        $q .= " (";
+                        foreach ($condition as $key_2 => $object) {
+                            if(is_object($object)){
+                                $is_last = $key_2 == count($condition) - 1 ? ")" : "";
+                                $q .= " (".$object->string.")  $is_last $object->condition ";
+                            }
+                        }
+                    }elseif(is_object($condition)){
+                        $object_condition = isset($condition->condition) ? $condition->condition : "";
+                        $q .= " $condition->string $object_condition ";
+                    }else{
+                        $separator = $key == count($where_conditions) - 1 ? "" : "AND";
+                        $q .= " $condition $separator ";
+                    }
+                }
             }
+            if(count($group_by) > 0){
+                $q .= " GROUP BY ";
+                foreach($group_by as $key => $group){
+                    $comma = $key == count($group_by) - 1 ? "" : ",";
+                    $q .= " $group"."$comma ";
+                }
+            }
+            if(count($order_by) > 0){
+                $q .= " ORDER BY ";
+                foreach($order_by as $key => $order){
+                    if(is_object($order)){
+                        $comma = $key == count($order_by) - 1 ? "" : ",";
+                        $q .= " $order->string $order->condition"."$comma ";
+                    }
+                }
+            }
+            if(strlen($limit) > 0){
+                $q .= " $limit";
+            }else{
+                $q .= " LIMIT 600";
+            }
+        }else{
+            $q = $q_in;
         }
-        if(strlen($where_conditions) > 0){
-            $q .= " ".$where_conditions." ";
-        }
-        $q .= "FROM $table LIMIT 600";
         $r = mysqli_query(DataBase::$mysqli, $q);
         if(mysqli_num_rows($r) > 0){
             $data = [];

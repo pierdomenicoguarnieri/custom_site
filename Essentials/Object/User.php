@@ -29,10 +29,22 @@ class UserOBJ extends DBObject
             (object)['name' => "is_admin", "label" => "Admin", "columns" => "6", "type" => "text", "print" => 1],
         );
         $replace = ["is_admin" => "IF(is_admin = 1, 'SI', 'NO') AS is_admin,"];
-        $where = [
-            (object)[]
-        ];
-        $viewObj->datas = $this->getData($this->table,$viewObj->fields,$replace,"");
+        // $where = [
+        //     [
+        //         (object)["string" => "name LIKE '%z%'", "condition" => "OR"],
+        //         (object)["string" => "name = 'Pierdomenico'", "condition" => "AND"]
+        //     ],
+        //     (object)["string" => "pwd IS NOT NULL", "condition" => "AND"],
+        //     "email IS NOT NULL"
+        // ];
+        // $group_by = [
+        //     "id",
+        //     "name"
+        // ];
+        // $order_by = [
+        //     (object)["string" => "id", "condition" => "DESC"]
+        // ];
+        $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,$replace);
         return $viewObj;
     }
 
