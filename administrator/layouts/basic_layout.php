@@ -15,7 +15,6 @@
                     <?php require_once ESSENTIALSPATH.'Routing/routing_controller.php' ?>
                 </div>
             </main>
-            <?php require_once ADMINPATH.'layouts/partials/footer.php' ?>
         </div>
     </body>
 </html>

@@ -11,7 +11,7 @@ body .pg-content-wrapper{
 }
 
 body main{
-    height: calc(100vh - 130px);
+    height: calc(100vh - 70px);
     display: flex;
 }
 

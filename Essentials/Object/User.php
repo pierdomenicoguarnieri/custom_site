@@ -17,7 +17,7 @@ class UserOBJ extends DBObject
 
     public function getListView($currentLoggedUser){
         $viewObj = new stdClass();
-        $viewObj->singlePage = "?page=detail&objects=User" . $this->objectName . "&id=";
+        $viewObj->singlePage = "?page=detail&object=" . $this->objectName . "&id=";
         $viewObj->titlePage = "Utenti";
         $viewObj->hasAdd = true;
         $viewObj->linkAdd = ADMINPATH . "?page=edit&object=" . $this->objectName;
@@ -29,21 +29,21 @@ class UserOBJ extends DBObject
             (object)['name' => "is_admin", "label" => "Admin", "columns" => "6", "type" => "text", "print" => 1],
         );
         $replace = ["is_admin" => "IF(is_admin = 1, 'SI', 'NO') AS is_admin,"];
-        // $where = [
-        //     [
-        //         (object)["string" => "name LIKE '%z%'", "condition" => "OR"],
-        //         (object)["string" => "name = 'Pierdomenico'", "condition" => "AND"]
-        //     ],
-        //     (object)["string" => "pwd IS NOT NULL", "condition" => "AND"],
-        //     "email IS NOT NULL"
-        // ];
-        // $group_by = [
-        //     "id",
-        //     "name"
-        // ];
-        // $order_by = [
-        //     (object)["string" => "id", "condition" => "DESC"]
-        // ];
+        $where = [
+            [
+                (object)["string" => "name LIKE '%z%'", "condition" => "OR"],
+                (object)["string" => "name = 'Pierdomenico'", "condition" => "AND"]
+            ],
+            (object)["string" => "pwd IS NOT NULL", "condition" => "AND"],
+            "email IS NOT NULL"
+        ];
+        $group_by = [
+            "id",
+            "name"
+        ];
+        $order_by = [
+            (object)["string" => "id", "condition" => "DESC"]
+        ];
         $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,$replace);
         return $viewObj;
     }
@@ -118,14 +118,14 @@ class UserOBJ extends DBObject
         $viewObj = new stdClass();
         $viewObj->title = $this->getProperty($obj, "name") . " " . $this->getProperty($obj, "surname");
         $viewObj->subtitle = $this->getProperty($obj, "email");
-        $viewObj->backlink = DOMAIN . "?page=obj&objects=User";
+        $viewObj->backlink = DOMAIN . "?page=obj&objects=". $this->objectName;
         if ($id == 0) {
             $viewObj->title = 'Nuovo Utente';
             $viewObj->subtitle = "";
             $viewObj->firstLetterInTitle = "";
-            $viewObj->backlinkEdit = DOMAIN . "?page=obj&objects=User";
+            $viewObj->backlinkEdit = DOMAIN . "?page=obj&objects=". $this->objectName;
         } else {
-            $viewObj->backlinkEdit = DOMAIN . "?page=detail&objects=User" . $this->objectName . "&id=" . $id;
+            $viewObj->backlinkEdit = DOMAIN . "?page=detail&objects=" . $this->objectName . "&id=" . $id;
         }
 
         //         if (intval(getGet("resetpwd")) && $id > 0) {
