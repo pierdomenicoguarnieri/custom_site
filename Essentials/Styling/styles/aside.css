@@ -2,7 +2,7 @@ aside{
     background-color: yellow;
     width: 400px;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
     padding: 10px 20px;
     ul{
         transition: all .5s;
