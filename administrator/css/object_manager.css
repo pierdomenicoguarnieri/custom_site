@@ -37,7 +37,7 @@ table{
 }
 .pg-tbody-container{
     max-height: 470px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .pg-object-contaier{
     border-radius: 10px;
