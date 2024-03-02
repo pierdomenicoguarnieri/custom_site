@@ -4,12 +4,122 @@
     --primary-color-dark: #F2F2F2;
     --secondary-color: #111111;
     --secondary-color-light: #666666;
-    --confirm-color: #24b817;
-    --confirm-color-light: #38c42b;
-    --confirm-color-dark: #138309;
+    --confirm-color: #2DC653;
+    --confirm-color-light: #25A244;
+    --confirm-color-dark: #10451D;
     --danger-color: #dfc800;
     --danger-color-light: #f3e744;
     --danger-color-dark: #dac510;
+
+    /* https://coolors.co/palette/10451d-155d27-1a7431-208b3a-25a244-2dc653-4ad66d-6ede8a-92e6a7-b7efc5 */
+    --pakistan-green: #10451dff;
+    --dartmouth-green: #155d27ff;
+    --dark-spring-green: #1a7431ff;
+    --forest-green: #208b3aff;
+    --pigment-green: #25a244ff;
+    --dark-pastel-green: #2dc653ff;
+    --malachite: #4ad66dff;
+    --light-green: #6ede8aff;
+    --celadon: #92e6a7ff;
+    --celadon-2: #b7efc5ff;
+
+    /* https://coolors.co/palette/efefef-384d6a-cacdd6-041d45-fcfcfe */
+    --antiflash-white: #efefefff;
+    --yinmn-blue: #384d6aff;
+    --french-gray: #cacdd6ff;
+    --oxford-blue: #041d45ff;
+    --white: #fcfcfeff;
+
+    /* https://coolors.co/palette/012a4a-013a63-01497c-014f86-2a6f97-2c7da0-468faf-61a5c2-89c2d9-a9d6e5 */
+    --prussian-blue: #012a4aff;
+    --indigo-dye: #013a63ff;
+    --indigo-dye-2: #01497cff;
+    --indigo-dye-3: #014f86ff;
+    --ucla-blue: #2a6f97ff;
+    --cerulean: #2c7da0ff;
+    --air-force-blue: #468fafff;
+    --air-superiority-blue: #61a5c2ff;
+    --sky-blue: #89c2d9ff;
+    --light-blue: #a9d6e5ff;
+
+    /* https://coolors.co/palette/000000-66666e-9999a1-e6e6e9-f4f4f6 */
+    --black: #000000ff;
+    --dim-gray: #66666eff;
+    --taupe-gray: #9999a1ff;
+    --platinum: #e6e6e9ff;
+    --antiflash-white: #f4f4f6ff;
+
+    /* https://coolors.co/palette/000000-0c1821-1b2a41-324a5f-ccc9dc */
+    --rich-black: #0c1821ff;
+    --oxford-blue-2: #1b2a41ff;
+    --charcoal: #324a5fff;
+    --lavender-web: #ccc9dcff;
+
+    /* https://coolors.co/palette/14110f-34312d-7e7f83-d9c5b2-f3f3f4 */
+    --smoky-black: #14110fff;
+    --jet: #34312dff;
+    --gray: #7e7f83ff;
+    --dun: #d9c5b2ff;
+    --antiflash-white: #f3f3f4ff;
+
+    /* https://coolors.co/palette/bcabae-0f0f0f-2d2e2e-716969-fbfbfb */
+    --rose-quartz: #bcabaeff;
+    --night: #0f0f0fff;
+    --jet: #2d2e2eff;
+    --dim-gray: #716969ff;
+    --white: #fbfbfbff;
+
+    /* https://coolors.co/palette/0a0908-22333b-eae0d5-c6ac8f-5e503f */
+    --black-2: #0a0908ff;
+    --gunmetal: #22333bff;
+    --almond: #eae0d5ff;
+    --khaki: #c6ac8fff;
+    --walnut-brown: #5e503fff;
+
+    /* https://coolors.co/palette/780000-c1121f-fdf0d5-003049-669bbc */
+    --barn-red: #780000ff;
+    --fire-brick: #c1121fff;
+    --papaya-whip: #fdf0d5ff;
+    --prussian-blue-2: #003049ff;
+    --air-superiority-blue: #669bbcff;
+
+    /* https://coolors.co/palette/dad7cd-a3b18a-588157-3a5a40-344e41 */
+    --timberwolf: #dad7cdff;
+    --sage: #a3b18aff;
+    --fern-green: #588157ff;
+    --hunter-green: #3a5a40ff;
+    --brunswick-green: #344e41ff;
+
+    /* https://coolors.co/palette/0d1b2a-1b263b-415a77-778da9-e0e1dd */
+    --rich-black-2: #0d1b2aff;
+    --oxford-blue-3: #1b263bff;
+    --yinmn-blue: #415a77ff;
+    --silver-lake-blue: #778da9ff;
+    --platinum: #e0e1ddff;
+
+    /* https://coolors.co/palette/000000-14213d-fca311-e5e5e5-ffffff */
+    --orange-web: #fca311ff;
+
+    /* https://coolors.co/palette/000814-001d3d-003566-ffc300-ffd60a */
+    --rich-black-3: #000814ff;
+    --oxford-blue-4: #001d3dff;
+    --yale-blue: #003566ff;
+    --mikado-yellow: #ffc300ff;
+    --gold: #ffd60aff;
+
+    /* https://coolors.co/palette/003049-d62828-f77f00-fcbf49-eae2b7 */
+    --prussian-blue-3: #003049ff;
+    --fire-engine-red: #d62828ff;
+    --orange-wheel: #f77f00ff;
+    --xanthous: #fcbf49ff;
+    --vanilla: #eae2b7ff;
+
+    /* https://coolors.co/palette/132a13-31572c-4f772d-90a955-ecf39e */
+    --dark-green: #132a13ff;
+    --hunter-green: #31572cff;
+    --fern-green: #4f772dff;
+    --moss-green: #90a955ff;
+    --mindaro: #ecf39eff;
 
     /* Font Sizes */
     --fs-small: 14px;

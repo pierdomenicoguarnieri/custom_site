@@ -1,45 +1,33 @@
 header{
-    background-color: bisque;
+    background-color: var(--confirm-color-dark);
     height: 80px;
     display: flex;
     justify-content: space-between;
-}
-
-header .pg-left-div{
-    margin-left: 15px;
-    width: 50%;
-    a{
-        height: 100%;
-        display: inline-block;
-        aspect-ratio: 1 / 1;
-        img{
+    .pg-left-div{
+        margin-left: 15px;
+        width: 50%;
+        a{
             height: 100%;
-            width: 100%;
-            filter: invert(100%);
+            display: inline-block;
+            aspect-ratio: 1 / 1;
+            img{
+                height: 100%;
+                width: 100%;
+                filter: invert(100%);
+            }
         }
     }
-}
 
-header .pg-right-div{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 300px;
-}
-
-header .pg-right-div button{
-    background-color: rgba(187, 16, 16, 0.6);
-    border: 2px solid transparent;
-    border-radius: 5px;
-    box-shadow: 2px 2px 10px 3px rgba(0, 0, 0, .2);
-    transition: all .3s;
-}
-
-header .pg-right-div button:hover{
-    background-color: rgba(187, 16, 16, 1);
-}
-
-header .pg-right-div .pg-logout{
-    text-decoration: none;
-    color: black;
+    .pg-right-div{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 300px;
+        button{
+            a{
+                text-decoration: none;
+                color: black;
+            }
+        }
+    }
 }

@@ -14,8 +14,8 @@
                 </ul>
             </nav>
             <div class="pg-button-wrapper">
-                <button>
-                    <a href="<?php echo DOMAIN ?>login.php" class="pg-login">LOGIN</a>
+                <button class="btn btn-confirm">
+                    <a href="<?php echo DOMAIN ?>login.php">LOGIN</a>
                 </button>
             </div>
         </div>
