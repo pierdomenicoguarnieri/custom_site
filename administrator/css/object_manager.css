@@ -22,7 +22,7 @@ table{
             filter: brightness(0.85);
         }
         tr:nth-child(even) {
-            background-color: var(--primary-color-dark);
+            background-color: var(--antiflash-white);
             filter: brightness(1);
             transition: filter 0.5s;
             cursor: pointer;

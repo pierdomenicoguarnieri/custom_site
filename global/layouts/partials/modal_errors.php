@@ -1,6 +1,7 @@
 <style>
 #modal-error{
     display: flex;
+    padding: 10px;
     border: 2px solid black;
     width: 30%;
     align-items: center;
@@ -8,24 +9,15 @@
     flex-direction: column;
     margin-bottom: 20px;
     background-color: white;
+    h3{
+        margin-bottom: 20px;
+    }
     span{
         color: red;
         margin-bottom: 20px;
     }
-    #confirm-modal{
-        margin-bottom: 20px;
-        background: green;
-        border: 1px solid transparent;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 15px;
-        padding: 5px 10px;
-        transition: all .3s;
+    button{
         color: white;
-    }
-    #confirm-modal:hover {
-        background-color: darkgreen !important;
-        transition: all 0.3s;
     }
 }
 </style>
@@ -35,7 +27,7 @@
     <?php foreach($errors as $error){ ?>
         <span><?php echo $error ?></span>
     <?php } ?>
-    <button id="confirm-modal" type="button" onclick="hideModal()">OK</button>
+    <button class="btn btn-confirm" type="button" onclick="hideModal()">OK</button>
 </div>
 
 <script>

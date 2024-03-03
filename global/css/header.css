@@ -1,5 +1,5 @@
 header{
-    background-color: var(--danger-color-dark);
+    background-color: var(--oxford-blue);
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -32,7 +32,7 @@ header{
                 button{
                     a{
                         text-decoration: none;
-                        color: black;
+                        color: var(--white);
                     }
                 }
             }
@@ -47,12 +47,13 @@ header{
                     width: 100%;
                     a{
                         text-decoration: none;
-                        color: black;
+                        color: var(--white);
                         transition: all .3s;
                     }
                     a:hover{
                         text-decoration: underline;
-                        color: rgba(0, 0, 0, .8);
+                        color: var(--white);
+                        opacity: 0.8;
                     }
                 }
             }

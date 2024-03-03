@@ -1,7 +1,7 @@
 aside{
-    background-color: var(--primary-color);
+    background-color: var(--white);
     filter: brightness(98%);
-    width: 400px;
+    width: 350px;
     height: 100%;
     overflow-y: auto;
     padding: 10px 20px;
@@ -30,7 +30,7 @@ aside{
             }
             a{
                 text-decoration: none;
-                color: black;
+                color: var(--black);
             }
         }
     }

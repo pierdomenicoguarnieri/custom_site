@@ -44,7 +44,7 @@
         <?php require_once ESSENTIALSPATH.'Styling/css_include.php'; ?>
     </head>
     <body>    
-        <main style="height:100vh;width:100vw;background-color:gray;display:flex;align-items:center;justify-content:center;position:relative;flex-direction:column;">
+        <main style="height:100vh;width:100vw;background-color:var(--antiflash-white);display:flex;align-items:center;justify-content:center;position:relative;flex-direction:column;">
             <?php if(isset($json) && $json->head == false){
                 $title = 'Errore Login!';
                 if(is_array($json->errors)){
@@ -67,8 +67,8 @@
                     <label for="email">Password</label>
                     <input type="password" name="pwd" class="form-input" placeholder="Inserisci la tua password">
                     <div style="width:100%;display: flex;justify-content:space-around;">
-                        <button type="submit" class="btn btn-confirm" name="login">Accedi</button>
-                        <button class="btn btn-danger" id="register-link" type="button" onclick="showRegister(false)">Registrati</button>
+                        <button type="submit" class="btn btn-confirm btn-outline" name="login">Accedi</button>
+                        <button class="btn btn-danger btn-outline" id="register-link" type="button" onclick="showRegister(false)">Registrati</button>
                     </div>
                 </form>
             </div>
@@ -87,8 +87,8 @@
                     <label for="pwd2">Conferma Password</label>
                     <input type="password" name="pwd2" class="form-input" placeholder="Conferma la tua password">
                     <div style="width:100%;display: flex;justify-content:space-around;">
-                        <button type="submit" class="btn btn-confirm" name="register">Registrati</button>
-                        <button class="btn btn-danger" id="register-link" type="button" onclick="showRegister(true)">Accedi</button>
+                        <button type="submit" class="btn btn-confirm btn-outline" name="register">Registrati</button>
+                        <button class="btn btn-danger btn-outline" id="register-link" type="button" onclick="showRegister(true)">Accedi</button>
                     </div>
                 </form>
             </div>

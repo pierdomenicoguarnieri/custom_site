@@ -1,10 +1,11 @@
 footer{
-    background-color: red;
+    background-color: var(--oxford-blue);
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     span{
         font-size: 30px;
+        color: var(--white);
     }
 }

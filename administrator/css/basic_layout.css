@@ -16,7 +16,7 @@ body main{
 }
 
 body main .pg-page-wrapper{
-    background: var(--primary-color);
+    background: var(--antiflash-white);
     height: 100%;
     width: 100%;
     overflow-y: auto;

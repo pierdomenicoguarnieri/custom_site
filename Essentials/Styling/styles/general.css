@@ -18,7 +18,7 @@ body{
 }
 
 .pg-card{
-  background-color: var(--primary-color);
+  background-color: var(--white);
   border-radius: 10px;
   padding: 20px;
   border: 1px solid rgba(0, 0, 0, 0.05);
