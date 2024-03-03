@@ -24,3 +24,60 @@ body{
   border: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 10px 10px 45px -10px rgba(66, 68, 90, 0.3), inset 0px 0px 60px -20px rgba(192, 192, 192, 0.3);
 }
+
+.pg-col{
+  padding: 0px 10px;
+  flex-shrink: 0;
+}
+
+.pg-col-1{
+  width: 8.333333%;
+}
+
+.pg-col-2{
+  width: 16.66666%;
+}
+
+.pg-col-3{
+  width: 25%;
+}
+
+.pg-col-4{
+  width: 33.333333%;
+}
+
+.pg-col-5{
+  width: 41.666666%;
+}
+
+.pg-col-6{
+  width: 50%;
+}
+
+.pg-col-7{
+  width: 58.333333%;
+}
+
+.pg-col-8{
+  width: 66.666666%;
+}
+
+.pg-col-9{
+  width: 75%;
+}
+
+.pg-col-10{
+  width: 83.333333%;
+}
+
+.pg-col-11{
+  width: 91.666666%;
+}
+
+.pg-col-12{
+  width: 100%;
+}
+
+.pg-h-100{
+  height: 100%;
+}

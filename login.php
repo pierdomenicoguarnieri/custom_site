@@ -7,6 +7,15 @@
         $params = array('email' => $email, 'pwd' => $pwd);
         $json = json_decode(getApi(DOMAIN.'Apis/getLogin.php', $params, 'GET'));
         $errors = [];
+        if(isset($json) && $json->head == true){
+            if(isset($json->body->cookie_name) && isset($json->body->date_end) && isset($json->body->token)){
+                $sessionOBJ = new SessionsOBJ();
+                $session = $sessionOBJ->setCookie($json->body->cookie_name, $json->body->token, strtotime($json->body->date_end),'/','localhost');
+                if($session === true){
+                    ?><script>window.location.href="<?php echo DOMAIN; ?>";</script><?php
+                }
+            }
+        }
     }
 
     if(isset($_POST['register'])){
@@ -22,17 +31,6 @@
         }
         $json = json_decode(getApi($url, $params, 'GET'));
         $errors = [];
-    }
-    if(isset($json) && $json->head == true){
-        if(isset($json->body->cookie_name) && isset($json->body->date_end) && isset($json->body->token)){
-            $cookie_name = $json->body->cookie_name;
-            $date_end = $json->body->date_end;
-            $token = $json->body->token;
-            $cookie = setCustomCookie($cookie_name, $token, strtotime($date_end),'/','localhost');
-            if($cookie == true){
-                ?><script>window.location.href="<?php echo DOMAIN; ?>";</script><?php
-            }
-        }
     }
 ?>
 
@@ -57,7 +55,9 @@
                 require GLOBALPATH.'layouts/partials/modal_errors.php';
             } ?>
             <div style="position:absolute;top:0;left:20px;height:50px;width:50px;display:flex;align-items:center;justify-content:center;">
-                <a href="<?php echo DOMAIN; ?>" style="text-decoration:none;color:black;font-size:40px;font-weight:800;">&#8592;</a>
+                <a href="<?php echo DOMAIN; ?>" style="text-decoration:none;color:black;font-size:30px;">
+                    <i class="fa fa-left-long"></i>
+                </a>
             </div>
             <div id="login-div" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
                 <h1 style="margin-bottom:20px;">Login</h1>

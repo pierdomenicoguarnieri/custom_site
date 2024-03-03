@@ -5,7 +5,7 @@ table{
     thead{
         text-align: center;
         tr{
-            background-color: blue;
+            background-color: var(--confirm-color-dark);
             th{
                 color: var(--primary-color);
             }

@@ -3,6 +3,7 @@ header{
     height: 80px;
     display: flex;
     justify-content: space-between;
+    color: var(--white);
     .pg-left-div{
         margin-left: 15px;
         width: 50%;
@@ -13,7 +14,6 @@ header{
             img{
                 height: 100%;
                 width: 100%;
-                filter: invert(100%);
             }
         }
     }

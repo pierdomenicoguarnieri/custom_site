@@ -2,10 +2,10 @@
     <nav>
         <ul>
             <li>
-                <span class="has-submenu">Link <span class="submenu-arrow closed">&#62;</span></span>
-                <ul class="hided medium-menu">
+                <span class="has-submenu">Link <span class="submenu-arrow closed"><i class="fa fa-caret-up"></i></span></span>
+                <ul class="hided">
                     <li>
-                        <span class="has-submenu">Link 2 <span class="submenu-arrow closed">&#62;</span></span>
+                        <span class="has-submenu">Link 2 <span class="submenu-arrow closed"><i class="fa fa-caret-up"></i></span></span>
                         <ul class="hided xsmall-menu">
                             <li>
                                 <span>Link 3</span>
@@ -29,7 +29,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li class="<?php echo $_GET['objects'] == 'User' || $_GET['object'] == 'User' ? 'active' : ''?>">
                 <a href="<?php echo DOMAIN.'?page=obj&objects=User' ?>">
                     <span><i class="fa fa-user"></i> Utenti</span>
                 </a>

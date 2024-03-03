@@ -1,0 +1,51 @@
+.pg-edit-wrapper{
+    .pg-edit-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .pg-edit-backlink{
+            text-decoration: none;
+            color: black;
+            font-size: 30px;
+        }
+    }
+    .pg-errors-modal-wrapper{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        #modal-error{
+            margin-bottom: 0 !important;
+        }
+    }
+    .pg-sections-wrapper{
+        padding-top: 50px;
+        .pg-big-section{
+            display: flex;
+            flex-wrap: wrap;
+            .pg-section{
+                margin-bottom: 20px;
+                .pg-section-header{
+                    display: flex;
+                    justify-content: space-between;
+                }
+                .pg-form-edit{
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 20px;
+                    .pg-inputs-wrapper{
+                        display: flex;
+                        .pg-input-wrapper{
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
+                    .pg-submit-wrapper{
+                        margin-top: 20px;
+                        align-self: flex-end;
+                    }
+                }
+            }
+        }
+    }
+}

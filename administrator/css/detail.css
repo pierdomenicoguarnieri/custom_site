@@ -1,0 +1,33 @@
+.pg-detail-wrapper{
+    .pg-detail-header{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .pg-detail-backlink{
+            text-decoration: none;
+            color: black;
+            font-size: 30px;
+        }
+    }
+    .pg-sections-wrapper{
+        padding-top: 50px;
+        .pg-big-section{
+            display: flex;
+            flex-wrap: wrap;
+            .pg-section{
+                margin-bottom: 20px;
+                .pg-section-header{
+                    display: flex;
+                    justify-content: space-between;
+                    .pg-section-buttons-wrapper{
+                        max-width: 50%;
+                        .pg-button-wrapper{
+                            display: inline-block;
+                            margin-right: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -9,8 +9,9 @@ if((isset($_COOKIE['ucode']) && strlen($_COOKIE['ucode']) > 0 && $_COOKIE['ucode
         $cookie_name = 'acode';
     }
     if(strlen($cookie_name) > 0){
-        $cookie = unsetCustomCookie($cookie_name);
-        if($cookie == true){
+        $sessionOBJ = new SessionsOBJ();
+        $session = $sessionOBJ->unsetCookie($cookie_name);
+        if($session === true){
             ?><script>window.location.href="<?php echo DOMAIN; ?>";</script><?php
         }
     }

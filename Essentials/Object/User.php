@@ -29,6 +29,7 @@ class UserOBJ extends DBObject
             (object)['name' => "is_admin", "label" => "Admin", "columns" => "6", "type" => "text", "print" => 1],
         );
         $replace = ["is_admin" => "IF(is_admin = 1, 'SI', 'NO') AS is_admin,"];
+        $where_q = ["is_admin != 1"];
         $where = [
             [
                 (object)["string" => "name LIKE '%z%'", "condition" => "OR"],
@@ -123,9 +124,9 @@ class UserOBJ extends DBObject
             $viewObj->title = 'Nuovo Utente';
             $viewObj->subtitle = "";
             $viewObj->firstLetterInTitle = "";
-            $viewObj->backlinkEdit = DOMAIN . "?page=obj&objects=". $this->objectName;
+            $viewObj->backlinkEdit = DOMAIN . "?page=obj&object=". $this->objectName;
         } else {
-            $viewObj->backlinkEdit = DOMAIN . "?page=detail&objects=" . $this->objectName . "&id=" . $id;
+            $viewObj->backlinkEdit = DOMAIN . "?page=detail&object=" . $this->objectName . "&id=" . $id;
         }
 
         //         if (intval(getGet("resetpwd")) && $id > 0) {
@@ -136,10 +137,39 @@ class UserOBJ extends DBObject
         //         }
 
         $viewObj->editHtml = "";
-
         $viewObj->bigSections = array();
         $sections = array();
 
+        $section = new stdClass();
+        $section->title = "Dati Generali";
+        $section->icon = "la-circle-o-notch";
+        $section->col = "12";
+        $section->type = "fields";
+        $section->visible_edit = true;
+        $section->visible = true;
+        $section->buttons = array(
+            (object)["label" => "Modifica", "icon" => "pencil", "button_class" => "danger", "link" => DOMAIN."?page=edit&object=".$this->objectName."&id=".$id]
+        );
+        $section->fields = array(
+            (object)["visible"=>1,"visible_edit"=>1,"name"=>"name","label"=>"Nome","col"=>"4","type"=>"text","value"=>$this->getProperty($obj, "name")],
+            (object)["visible"=>1,"visible_edit"=>1,"name"=>"surname","label"=>"Cognome","col"=>"4","type"=>"text","value"=>$this->getProperty($obj, "surname")],
+            (object)["visible"=>1,"visible_edit"=>1,"name"=>"email","label"=>"Email","col"=>"4","type"=>"text","value"=>$this->getProperty($obj, "email")]
+        );
+        array_push($sections, $section);
+
+        $section = new stdClass();
+        $section->title = "Sessioni";
+        $section->icon = "la-circle-o-notch";
+        $section->col = "6";
+        $section->type = "fields";
+        $section->visible_edit = false;
+        $section->visible = true;
+        $results = $this->getSessions($id);
+        $section->fields = array();
+        foreach ($results as $result) {
+            array_push($section->fields, $result);
+        }
+        array_push($sections, $section);
         $bigSection = new stdClass();
         $bigSection->inEditView = true;
         $bigSection->inView = true;
@@ -168,5 +198,19 @@ class UserOBJ extends DBObject
         } else {
             return $default;
         }
+    }
+
+    public function getSessions($id){
+        $q = "SELECT * FROM sessions_users WHERE id_user = $id";
+        $r = mysqli_query(DataBase::$mysqli, $q);
+        $results = [];
+        if(mysqli_num_rows($r) > 0){
+            for ($i = 0; $i < mysqli_num_rows($r); $i++) { 
+                array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"session_start","label"=>"Inizio Sessione","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'session_start', $i)]);
+                array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"session_end","label"=>"Fine Sessione","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'session_end', $i)]);
+            }
+        }
+
+        return $results;
     }
 }
