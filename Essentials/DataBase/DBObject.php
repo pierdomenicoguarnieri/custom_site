@@ -299,7 +299,7 @@ class DBObject extends stdClass
                 foreach ($array as $key => $value) {
                     foreach ($fields as $object) {
                         if($object->name == $key){
-                            array_push($row, (object)['value' => $value, 'print' => $object->print]);
+                            array_push($row, (object)['value' => $value, 'print' => $object->print, 'col' => $object->col]);
                         }
                     }
                 }

@@ -28,54 +28,67 @@ body{
 .pg-col{
   padding: 0px 10px;
   flex-shrink: 0;
+  flex-grow: 0;
 }
 
 .pg-col-1{
   width: 8.333333%;
+  max-width: 8.333333%;
 }
 
 .pg-col-2{
   width: 16.66666%;
+  max-width: 16.66666%;
 }
 
 .pg-col-3{
   width: 25%;
+  max-width: 25%;
 }
 
 .pg-col-4{
   width: 33.333333%;
+  max-width: 33.333333%;
 }
 
 .pg-col-5{
   width: 41.666666%;
+  max-width: 41.666666%;
 }
 
 .pg-col-6{
   width: 50%;
+  max-width: 50%;
 }
 
 .pg-col-7{
   width: 58.333333%;
+  max-width: 58.333333%;
 }
 
 .pg-col-8{
   width: 66.666666%;
+  max-width: 66.666666%;
 }
 
 .pg-col-9{
   width: 75%;
+  max-width: 75%;
 }
 
 .pg-col-10{
   width: 83.333333%;
+  max-width: 83.333333%;
 }
 
 .pg-col-11{
   width: 91.666666%;
+  max-width: 91.666666%;
 }
 
 .pg-col-12{
   width: 100%;
+  max-width: 100%;
 }
 
 .pg-h-100{

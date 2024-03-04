@@ -22,11 +22,11 @@ class UserOBJ extends DBObject
         $viewObj->hasAdd = true;
         $viewObj->linkAdd = ADMINPATH . "?page=edit&object=" . $this->objectName;
         $viewObj->fields = array(
-            (object)['name' => "id", "label" => "ID", "columns" => "6", "type" => "text", "print" => 0],
-            (object)['name' => "name", "label" => "Nome", "columns" => "6", "type" => "text", "print" => 1],
-            (object)['name' => "surname", "label" => "Cognome", "columns" => "6", "type" => "text", "print" => 1],
-            (object)['name' => "email", "label" => "Email", "columns" => "6", "type" => "text", "print" => 1],
-            (object)['name' => "is_admin", "label" => "Admin", "columns" => "6", "type" => "text", "print" => 1],
+            (object)['name' => "id", "label" => "ID", "col" => "0", "type" => "text", "print" => 0],
+            (object)['name' => "name", "label" => "Nome", "col" => "4", "type" => "text", "print" => 1],
+            (object)['name' => "surname", "label" => "Cognome", "col" => "4", "type" => "text", "print" => 1],
+            (object)['name' => "email", "label" => "Email", "col" => "3", "type" => "text", "print" => 1],
+            (object)['name' => "is_admin", "label" => "Admin", "col" => "1", "type" => "text", "print" => 1],
         );
         $replace = ["is_admin" => "IF(is_admin = 1, 'SI', 'NO') AS is_admin,"];
         $where_q = ["is_admin != 1"];

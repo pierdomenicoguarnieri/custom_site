@@ -1,46 +1,96 @@
-table{
-    border-spacing: 0;
-    width: 100%;
-    border-radius: 5px;
-    thead{
-        text-align: center;
-        tr{
-            background-color: var(--confirm-color-dark);
-            th{
-                color: var(--primary-color);
-            }
-        }
-    }
-    tbody{
-        tr:nth-child(odd) {
-            background-color: var(--primary-color);
-            filter: brightness(1);
-            transition: filter 0.5s;
-            cursor: pointer;
-        }
-        tr:nth-child(odd):hover {
-            filter: brightness(0.85);
-        }
-        tr:nth-child(even) {
-            background-color: var(--antiflash-white);
-            filter: brightness(1);
-            transition: filter 0.5s;
-            cursor: pointer;
-        }
-        tr:nth-child(even):hover {
-            filter: brightness(0.85);
-        }
-    }
-    td,th{
-        padding: 10px 20px;
-    }
-}
-.pg-tbody-container{
-    max-height: 470px;
-    overflow-y: auto;
-}
 .pg-object-contaier{
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 10px 10px 45px -10px rgba(66, 68, 90, 0.3), inset 0px 0px 60px -20px rgba(192, 192, 192, 0.3);
+    .pg-table{
+        border-spacing: 0;
+        width: 100%;
+        border-radius: 5px;
+        .pg-tr{
+            display: flex;
+        }
+        .pg-table-head{
+            text-align: center;
+            .pg-table-row{
+                background-color: var(--confirm-color-dark);
+                color: var(--white);
+                font-weight: var(--fw-bold);
+                display: flex;
+                .pg-th{
+                    color: var(--primary-color);
+                    .pg-input-wrapper.hided{
+                        max-height: 0px;
+                        opacity: 0;
+                        transition: all .3s;
+                    }
+                    .pg-input-wrapper{
+                        max-height: 100px;
+                        opacity: 1;
+                        transition: all .3s;
+                        .pg-filters-container{
+                            position: relative;
+                            width: 10px;
+                            display: inline-block;
+                            .pg-filters-select{
+                                position: absolute;
+                                z-index: 1000;
+                                opacity: 1;
+                                top: 0;
+                                right: 100%;
+                                width: 100px;
+                                border-radius: 5px;
+                                transition: all .3s;
+                                background-color: var(--white);
+                                color: var(--black);
+                            }
+                            .pg-filters-select.hided{
+                                opacity: 0;
+                                transition: all .3s;
+                            }
+                        }
+                        .form-input{
+                            width: 75%;
+                            max-width: 150px;
+                            display: inline-block;
+                            min-width: 0px;
+                        }
+                    }
+                }
+            }
+        }
+        .pg-tbody-container{
+            max-height: 470px;
+            overflow-y: auto;
+            .pg-tbody{
+                display: flex;
+                flex-direction: column;
+                .pg-tr:nth-child(odd) {
+                    background-color: var(--primary-color);
+                    filter: brightness(1);
+                    transition: filter 0.5s;
+                    cursor: pointer;
+                }
+                .pg-tr:nth-child(odd):hover {
+                    filter: brightness(0.85);
+                }
+                .pg-tr:nth-child(even) {
+                    background-color: var(--antiflash-white);
+                    filter: brightness(1);
+                    transition: filter 0.5s;
+                    cursor: pointer;
+                }
+                .pg-tr:nth-child(even):hover {
+                    filter: brightness(0.85);
+                }
+            }
+        }
+        .pg-td.pg-col,.pg-th.pg-col{
+            padding: 10px 20px;
+            overflow: hidden;
+        }
+        .pg-td.pg-col{
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
 }
