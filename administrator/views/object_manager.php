@@ -23,17 +23,14 @@ for ($i = 0; $i < count($objects); $i++) {
                                 <?php echo $row->label ?>
                                 <div class="pg-input-wrapper hided">
                                     <div class="pg-filters-container">
-                                        <button class="btn btn-small">
+                                        <button class="btn btn-small pg-toggle-filter">
                                             <i class="fa-solid fa-ellipsis-vertical"></i>
                                         </button>
-                                        <div class="pg-filters-select">
-                                            <span>aaa</span>
-                                            <span>aaa</span>
-                                            <span>aaa</span>
-                                            <span>aaa</span>
-                                            <span>aaa</span>
-                                            <span>aaa</span>
-                                        </div>
+                                        <select name="query_filter" class="pg-filters-select hidden">
+                                            <option value="1" selected>Contiene</option>
+                                            <option value="2">Maggiore a</option>
+                                            <option value="3">Uguale a</option>
+                                        </select>
                                     </div>
                                     <input class="form-input hided" type="<?php echo $row->type ?>">
                                 </div>

@@ -22,4 +22,32 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = this.dataset.href;
         });
     });
+
+    var toggleButtons = document.querySelectorAll('.pg-toggle-filter');
+
+    toggleButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var filtersSelect = this.parentNode.querySelector('.pg-filters-select');
+            filtersSelect.classList.toggle('hidden');
+
+            // Ottieni la riga della tabella
+            var tableRow = this.closest('.pg-table-head').querySelector('.pg-table-row');
+
+            // Controlla se tutti i filtri sono nascosti
+            var allHidden = true;
+            var filterSelects = tableRow.querySelectorAll('.pg-filters-select');
+            filterSelects.forEach(function(select) {
+                if (!select.classList.contains('hidden')) {
+                    allHidden = false;
+                }
+            });
+
+            // Aggiungi o rimuovi la classe pg-height-increased in base allo stato dei filtri
+            if (!allHidden) {
+                tableRow.classList.add('pg-height-increased');
+            } else {
+                tableRow.classList.remove('pg-height-increased');
+            }
+        });
+    });
 });
