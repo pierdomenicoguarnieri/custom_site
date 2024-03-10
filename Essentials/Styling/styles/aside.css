@@ -63,3 +63,9 @@ aside{
         max-height: 0px;
     }
 }
+
+@media screen and (max-width: 1768px){
+    aside{
+        width: 300px;
+    }
+}

@@ -7,16 +7,30 @@ for ($i = 0; $i < count($objects); $i++) {
 }
 $filter = false;
 $where = array();
-foreach($_POST as $name => $input){
-    if(strpos($name,"select_") !== false){
+$fields = [];
+foreach($_POST as $key => $input){
+    if($key == 'fields'){
+        $fields = json_decode(base64_decode($_POST['fields']));
+    }
+
+    if(strpos($key,"select_") !== false){
         switch ($input) {
             case '1':
                 $condition = "LIKE";
                 break;
             case '2':
-                $condition = ">=";
+                $condition = ">";
                 break;
             case '3':
+                $condition = ">=";
+                break;
+            case '4':
+                $condition = "<";
+                break;
+            case '5':
+                $condition = "<=";
+                break;
+            case '6':
                 $condition = "=";
                 break;
             default:
@@ -25,12 +39,19 @@ foreach($_POST as $name => $input){
         }
     }
 
-    if(strpos($name,"input_") !== false && strlen($input) > 0){
+    if(strpos($key,"input_") !== false && strlen($input) > 0){
+        $name = str_replace("input_","",$key);
+        foreach ($fields as $field) {
+            if($field->name == $name){
+                if($field->type_column == 'flag'){
+                    $input = strtolower($input) == 'si' ? 1 : 0 ;
+                }
+            }
+        }
         if($condition == "LIKE"){
             $input = "%".$input."%";
         }
-        $name = str_replace("input_","",$name);
-        array_push($where,"$name $condition '$input'");
+        array_push($where,"UPPER($name) $condition UPPER('$input')");
     }
 }
 if(count($where) > 0){
@@ -50,6 +71,7 @@ if(count($where) > 0){
             <div class="pg-table-head">
                 <div class="pg-table-row">
                     <form action="" method="POST">
+                    <input type="text" value="<?php echo base64_encode(json_encode($listView->fields)) ?>" name="fields" class="pg-input-fields">
                     <?php foreach($listView->fields as $row){
                         if($row->print == 1){ ?>
                             <div class="pg-th pg-col pg-col-<?php echo $row->col ?>">
@@ -65,7 +87,10 @@ if(count($where) > 0){
                                         <select name="select_<?php echo $row->name ?>" class="pg-filters-select hidden">
                                             <option value="1">Contiene</option>
                                             <option value="2">Maggiore a</option>
-                                            <option value="3">Uguale a</option>
+                                            <option value="3">Maggiore uguale a</option>
+                                            <option value="4">Minore a</option>
+                                            <option value="5">Minore uguale a</option>
+                                            <option value="6">Uguale a</option>
                                         </select>
                                     </div>
                                     <input class="form-input hided" type="<?php echo $row->type ?>" name="input_<?php echo $row->name ?>" value="<?php echo $filter && strlen($_POST["input_".$row->name]) > 0 ? $_POST["input_".$row->name] : ''?>">
@@ -73,8 +98,8 @@ if(count($where) > 0){
                             </div>
                         <?php }
                     } ?>
-                    <button class="btn btn-small pg-search-button" type="submit">
-                        <i class="fa-solid fa-magnifying-glass"></i> Cerca
+                    <button class="btn btn-small pg-search-button" type="submit" title="Cerca">
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                     </form>
                 </div>
