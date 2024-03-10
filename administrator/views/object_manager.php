@@ -5,43 +5,84 @@ for ($i = 0; $i < count($objects); $i++) {
     $n = $objects[$i] . "OBJ";
     $objectsOBJ[strtoupper($objects[$i])] = new $n;
 }
+$filter = false;
+$where = array();
+foreach($_POST as $name => $input){
+    if(strpos($name,"select_") !== false){
+        switch ($input) {
+            case '1':
+                $condition = "LIKE";
+                break;
+            case '2':
+                $condition = ">=";
+                break;
+            case '3':
+                $condition = "=";
+                break;
+            default:
+                $condition = "=";
+                break;
+        }
+    }
+
+    if(strpos($name,"input_") !== false && strlen($input) > 0){
+        if($condition == "LIKE"){
+            $input = "%".$input."%";
+        }
+        $name = str_replace("input_","",$name);
+        array_push($where,"$name $condition '$input'");
+    }
+}
+if(count($where) > 0){
+    $filter = true;
+}
 ?>
 
 <div class="pg-object-contaier">
     <?php foreach($objectsOBJ as $object){
         $listView = $object->getListView($GLOBALS['CURRENT_USER']->id);
-        $datas = $object->getListView($GLOBALS['CURRENT_USER']->id)->datas;?>
+        if($filter){
+            $datas = $object->getData("",$listView->table,$listView->fields,$listView->replace,$where);
+        }else{
+            $datas = $listView->datas;
+        }?>
         <div class="pg-table">
             <div class="pg-table-head">
                 <div class="pg-table-row">
+                    <form action="" method="POST">
                     <?php foreach($listView->fields as $row){
                         if($row->print == 1){ ?>
                             <div class="pg-th pg-col pg-col-<?php echo $row->col ?>">
-                                <button class="btn btn-xsmall btn-confirm pg-filter-button">
+                                <button class="btn btn-xsmall btn-confirm pg-filter-button" type="button">
                                     <i class="fa-solid fa-filter"></i>
                                 </button>
                                 <?php echo $row->label ?>
-                                <div class="pg-input-wrapper hided">
+                                <div class="pg-input-wrapper <?php echo $filter && !empty($_POST["input_".$row->name]) ? '' : 'hided'; ?>">
                                     <div class="pg-filters-container">
-                                        <button class="btn btn-small pg-toggle-filter">
+                                        <button class="btn btn-small pg-toggle-filter" type="button">
                                             <i class="fa-solid fa-ellipsis-vertical"></i>
                                         </button>
-                                        <select name="query_filter" class="pg-filters-select hidden">
-                                            <option value="1" selected>Contiene</option>
+                                        <select name="select_<?php echo $row->name ?>" class="pg-filters-select hidden">
+                                            <option value="1">Contiene</option>
                                             <option value="2">Maggiore a</option>
                                             <option value="3">Uguale a</option>
                                         </select>
                                     </div>
-                                    <input class="form-input hided" type="<?php echo $row->type ?>">
+                                    <input class="form-input hided" type="<?php echo $row->type ?>" name="input_<?php echo $row->name ?>" value="<?php echo $filter && strlen($_POST["input_".$row->name]) > 0 ? $_POST["input_".$row->name] : ''?>">
                                 </div>
                             </div>
                         <?php }
                     } ?>
+                    <button class="btn btn-small pg-search-button" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i> Cerca
+                    </button>
+                    </form>
                 </div>
             </div>
             <div class="pg-tbody-container">
                 <div class="pg-tbody">
-                    <?php foreach($datas as $rows){ ?>
+                    <?php if((is_array($datas) && count($datas) > 0) || $datas != NULL) {                        
+                    foreach($datas as $rows){ ?>
                         <div class="pg-tr clickable-row" data-href="<?php echo DOMAIN.$listView->singlePage.$rows[0]->value?>">
                             <?php foreach ($rows as $obj) {
                                 if($obj->print == 1){ ?>
@@ -50,6 +91,13 @@ for ($i = 0; $i < count($objects); $i++) {
                                     </div>
                                 <?php }
                             } ?>
+                        </div>
+                    <?php }
+                    }else{ ?>
+                        <div class="pg-tr">
+                            <div class="pg-td pg-col pg-no-data">
+                                <span>Nessun dato trovato</span>
+                            </div>
                         </div>
                     <?php } ?>
                 </div>

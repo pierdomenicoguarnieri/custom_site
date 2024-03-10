@@ -46,6 +46,8 @@ class UserOBJ extends DBObject
             (object)["string" => "id", "condition" => "DESC"]
         ];
         $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,$replace);
+        $viewObj->replace = $replace;
+        $viewObj->table = $this->table;
         return $viewObj;
     }
 
