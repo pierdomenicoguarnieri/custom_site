@@ -54,6 +54,7 @@ foreach($_POST as $key => $input){
         array_push($where,"UPPER($name) $condition UPPER('$input')");
     }
 }
+
 if(count($where) > 0){
     $filter = true;
 }
@@ -71,36 +72,36 @@ if(count($where) > 0){
             <div class="pg-table-head">
                 <div class="pg-table-row">
                     <form action="" method="POST">
-                    <input type="text" value="<?php echo base64_encode(json_encode($listView->fields)) ?>" name="fields" class="pg-input-fields">
-                    <?php foreach($listView->fields as $row){
-                        if($row->print == 1){ ?>
-                            <div class="pg-th pg-col pg-col-<?php echo $row->col ?>">
-                                <button class="btn btn-xsmall btn-confirm pg-filter-button" type="button">
-                                    <i class="fa-solid fa-filter"></i>
-                                </button>
-                                <?php echo $row->label ?>
-                                <div class="pg-input-wrapper <?php echo $filter && !empty($_POST["input_".$row->name]) ? '' : 'hided'; ?>">
-                                    <div class="pg-filters-container">
-                                        <button class="btn btn-small pg-toggle-filter" type="button">
-                                            <i class="fa-solid fa-ellipsis-vertical"></i>
-                                        </button>
-                                        <select name="select_<?php echo $row->name ?>" class="pg-filters-select hidden">
-                                            <option value="1">Contiene</option>
-                                            <option value="2">Maggiore a</option>
-                                            <option value="3">Maggiore uguale a</option>
-                                            <option value="4">Minore a</option>
-                                            <option value="5">Minore uguale a</option>
-                                            <option value="6">Uguale a</option>
-                                        </select>
+                        <input type="text" value="<?php echo base64_encode(json_encode($listView->fields)) ?>" name="fields" class="pg-input-fields">
+                        <?php foreach($listView->fields as $row){
+                            if($row->print == 1){ ?>
+                                <div class="pg-th pg-col pg-col-<?php echo $row->col ?>">
+                                    <button class="btn btn-xsmall btn-confirm pg-filter-button" type="button">
+                                        <i class="fa-solid fa-filter"></i>
+                                    </button>
+                                    <?php echo $row->label ?>
+                                    <div class="pg-input-wrapper <?php echo $filter && !empty($_POST["input_".$row->name]) ? '' : 'hided'; ?>">
+                                        <div class="pg-filters-container">
+                                            <button class="btn btn-small pg-toggle-filter" type="button">
+                                                <i class="fa-solid fa-ellipsis-vertical"></i>
+                                            </button>
+                                            <select name="select_<?php echo $row->name ?>" class="pg-filters-select hidden">
+                                                <option value="1">Contiene</option>
+                                                <option value="2">Maggiore a</option>
+                                                <option value="3">Maggiore uguale a</option>
+                                                <option value="4">Minore a</option>
+                                                <option value="5">Minore uguale a</option>
+                                                <option value="6">Uguale a</option>
+                                            </select>
+                                        </div>
+                                        <input class="form-input hided" type="<?php echo $row->type ?>" name="input_<?php echo $row->name ?>" value="<?php echo $filter && strlen($_POST["input_".$row->name]) > 0 ? $_POST["input_".$row->name] : ''?>">
                                     </div>
-                                    <input class="form-input hided" type="<?php echo $row->type ?>" name="input_<?php echo $row->name ?>" value="<?php echo $filter && strlen($_POST["input_".$row->name]) > 0 ? $_POST["input_".$row->name] : ''?>">
                                 </div>
-                            </div>
-                        <?php }
-                    } ?>
-                    <button class="btn btn-small pg-search-button" type="submit" title="Cerca">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
+                            <?php }
+                        } ?>
+                        <button class="btn btn-small pg-search-button" type="submit" title="Cerca">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
                     </form>
                 </div>
             </div>
