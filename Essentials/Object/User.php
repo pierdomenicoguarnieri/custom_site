@@ -21,15 +21,17 @@ class UserOBJ extends DBObject
         $viewObj->titlePage = "Utenti";
         $viewObj->hasAdd = true;
         $viewObj->linkAdd = ADMINPATH . "?page=edit&object=" . $this->objectName;
+        $viewObj->buttons = array(
+            (object)["label" => "Aggiungi", "icon" => "plus", "button_class" => "confirm btn-small", "link" => DOMAIN."?page=edit&object=".$this->objectName]
+        );
         $viewObj->fields = array(
             (object)['name' => "id", "label" => "ID", "col" => "0", "type" => "text", "type_column" => "int", "print" => 0],
-            (object)['name' => "name", "label" => "Nome", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
-            (object)['name' => "surname", "label" => "Cognome", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
-            (object)['name' => "email", "label" => "Email", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
-            (object)['name' => "is_admin", "label" => "Admin", "col" => "3", "type" => "text", "type_column" => "flag", "print" => 1],
+            (object)['name' => "name", "label" => "Nome", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "surname", "label" => "Cognome", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "email", "label" => "Email", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1]
         );
         $replace = ["is_admin" => "IF(is_admin = 1, 'SI', 'NO') AS is_admin,"];
-        $where_q = ["is_admin != 1"];
+        $where_q = ["is_admin != 0"];
         $where = [
             [
                 (object)["string" => "name LIKE '%z%'", "condition" => "OR"],
@@ -45,7 +47,7 @@ class UserOBJ extends DBObject
         $order_by = [
             (object)["string" => "id", "condition" => "DESC"]
         ];
-        $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,$replace);
+        $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,'',$where_q);
         $viewObj->replace = $replace;
         $viewObj->table = $this->table;
         return $viewObj;
@@ -172,25 +174,6 @@ class UserOBJ extends DBObject
             array_push($section->fields, $result);
         }
         array_push($sections, $section);
-
-        if($obj->is_admin == 0){
-            $section = new stdClass();
-            $section->title = "Anagrafica";
-            $section->icon = "la-circle-o-notch";
-            $section->col = "6";
-            $section->type = "fields";
-            $section->visible_edit = false;
-            $section->visible = true;
-            $section->buttons = array(
-                (object)["label" => "Aggiungi", "icon" => "plus", "button_class" => "confirm btn-xsmall", "link" => DOMAIN."?page=edit&object=Patient&id_user=".$id]
-            );
-            $results = $this->getAnagrafica($obj->id_patient);
-            $section->fields = array();
-            foreach ($results as $result) {
-                array_push($section->fields, $result);
-            }
-            array_push($sections, $section);
-        }
         $bigSection = new stdClass();
         $bigSection->inEditView = true;
         $bigSection->inView = true;
@@ -222,27 +205,15 @@ class UserOBJ extends DBObject
     }
 
     public function getSessions($id){
-        $q = "SELECT * FROM sessions_users WHERE id_user = $id";
-        $r = mysqli_query(DataBase::$mysqli, $q);
         $results = [];
-        if(mysqli_num_rows($r) > 0){
-            for ($i = 0; $i < mysqli_num_rows($r); $i++) { 
-                array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"session_start","label"=>"Inizio Sessione","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'session_start', $i)]);
-                array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"session_end","label"=>"Fine Sessione","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'session_end', $i)]);
-            }
-        }
-
-        return $results;
-    }
-
-    public function getAnagrafica($id){
-        $q = "SELECT * FROM patients WHERE id = $id";
-        $r = mysqli_query(DataBase::$mysqli, $q);
-        $results = [];
-        if(mysqli_num_rows($r) > 0){
-            for ($i = 0; $i < mysqli_num_rows($r); $i++) { 
-                array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"name","label"=>"Nome","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'name', $i)]);
-                array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"surname","label"=>"Cognome","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'surname', $i)]);
+        if(strlen($id) > 0){
+            $q = "SELECT * FROM sessions_users WHERE id_user = $id";
+            $r = mysqli_query(DataBase::$mysqli, $q);
+            if(mysqli_num_rows($r) > 0){
+                for ($i = 0; $i < mysqli_num_rows($r); $i++) { 
+                    array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"session_start","label"=>"Inizio Sessione","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'session_start', $i)]);
+                    array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"session_end","label"=>"Fine Sessione","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'session_end', $i)]);
+                }
             }
         }
 

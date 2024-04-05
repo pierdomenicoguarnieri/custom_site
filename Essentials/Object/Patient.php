@@ -21,12 +21,17 @@ class PatientOBJ extends DBObject
         $viewObj->titlePage = "Pazienti";
         $viewObj->hasAdd = true;
         $viewObj->linkAdd = ADMINPATH . "?page=edit&object=" . $this->objectName;
+        $viewObj->buttons = array(
+            (object)["label" => "Aggiungi", "icon" => "plus", "button_class" => "confirm btn-small", "link" => DOMAIN."?page=edit&object=".$this->objectName."&id="]
+        );
         $viewObj->fields = array(
             (object)['name' => "id", "label" => "ID", "col" => "0", "type" => "text", "type_column" => "int", "print" => 0],
-            (object)['name' => "name", "label" => "Nome", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
-            (object)['name' => "surname", "label" => "Cognome", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "name", "label" => "Nome", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "surname", "label" => "Cognome", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "email", "label" => "Email", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
         );
-        $viewObj->datas = $this->getData("",$this->table,$viewObj->fields);
+        $replace = ["email" => "(SELECT email FROM users WHERE users.id_patient = patients.id) AS email"];
+        $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,$replace);
         $viewObj->table = $this->table;
         return $viewObj;
     }
@@ -35,11 +40,6 @@ class PatientOBJ extends DBObject
         $message = '';
         if (strlen($params['name']) && strlen($params['surname'])) {
             $message = $this->popolateArray($params, $this->objectName);
-            if(isset($_GET['id_user'])){
-                $last_id= mysqli_insert_id(DataBase::$mysqli);
-                $q = "UPDATE users SET id_patient = '$last_id' WHERE users.id = ?";
-                DataBase::executeQueryPrepare($q,'s',[$_GET['id_user']]);
-            }
         } else {
             if (!strlen($params['name'])) {
                 $message = 'Il nome è obbligatorio!';

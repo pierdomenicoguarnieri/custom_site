@@ -20,7 +20,7 @@ if(isset($_POST['set'])){
         <a href="<?php echo $obj->backlinkEdit; ?>" class="pg-edit-backlink">
             <i class="fa fa-left-long"></i>
         </a>
-        <h1>Modifica <?php echo $obj->title ?></h1>
+        <h1><?php echo $obj->title ?></h1>
         <h4><?php echo $obj->subtitle ?></h4>
     </div>
     <?php if(isset($messages) && strlen($messages) > 0){

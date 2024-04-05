@@ -68,6 +68,20 @@ if(count($where) > 0){
         }else{
             $datas = $listView->datas;
         }?>
+        <div class="pg-buttons-wrapper">
+            <?php foreach($listView->buttons as $button){ ?>
+                <div class="pg-button-wrapper">                                            
+                    <a href="<?php echo $button->link ?>">
+                        <button class="btn<?php echo isset($button->button_class) ? ' btn-'.$button->button_class : '' ?>">
+                            <?php if(isset($button->icon)){ ?>
+                                <i class="fa fa-<?php echo $button->icon ?>"></i>
+                            <?php } ?>
+                            <span><?php echo $button->label ?></span>
+                        </button>
+                    </a>
+                </div>
+            <?php } ?>
+        </div>
         <div class="pg-table">
             <div class="pg-table-head">
                 <div class="pg-table-row">
