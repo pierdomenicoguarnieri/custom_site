@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Feb 26, 2024 alle 22:08
+-- Creato il: Apr 05, 2024 alle 13:11
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -31,6 +31,19 @@ CREATE TABLE `admin_tokens` (
   `id` int(11) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
   `used` tinyint(4) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `patients`
+--
+
+CREATE TABLE `patients` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL,
+  `id_anagrafica` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
 -- --------------------------------------------------------
@@ -70,7 +83,8 @@ CREATE TABLE `users` (
   `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `pwd` varchar(255) NOT NULL,
-  `is_admin` tinyint(4) NOT NULL DEFAULT 0
+  `is_admin` tinyint(4) NOT NULL DEFAULT 0,
+  `id_patient` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
 --
@@ -81,6 +95,12 @@ CREATE TABLE `users` (
 -- Indici per le tabelle `admin_tokens`
 --
 ALTER TABLE `admin_tokens`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `patients`
+--
+ALTER TABLE `patients`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -110,6 +130,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT per la tabella `admin_tokens`
 --
 ALTER TABLE `admin_tokens`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `patients`
+--
+ALTER TABLE `patients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

@@ -34,6 +34,11 @@
                     <span><i class="fa fa-user"></i> Utenti</span>
                 </a>
             </li>
+            <li class="<?php echo $_GET['objects'] == 'Patient' || $_GET['object'] == 'Patient' ? 'active' : ''?>">
+                <a href="<?php echo DOMAIN.'?page=obj&objects=Patient' ?>">
+                    <span><i class="fa fa-hospital-user"></i> Pazienti</span>
+                </a>
+            </li>
             <li>
                 <span>Link</span>
             </li>

@@ -126,7 +126,7 @@ class UserOBJ extends DBObject
             $viewObj->title = 'Nuovo Utente';
             $viewObj->subtitle = "";
             $viewObj->firstLetterInTitle = "";
-            $viewObj->backlinkEdit = DOMAIN . "?page=obj&object=". $this->objectName;
+            $viewObj->backlinkEdit = DOMAIN . "?page=obj&objects=". $this->objectName;
         } else {
             $viewObj->backlinkEdit = DOMAIN . "?page=detail&object=" . $this->objectName . "&id=" . $id;
         }
@@ -172,6 +172,25 @@ class UserOBJ extends DBObject
             array_push($section->fields, $result);
         }
         array_push($sections, $section);
+
+        if($obj->is_admin == 0){
+            $section = new stdClass();
+            $section->title = "Anagrafica";
+            $section->icon = "la-circle-o-notch";
+            $section->col = "6";
+            $section->type = "fields";
+            $section->visible_edit = false;
+            $section->visible = true;
+            $section->buttons = array(
+                (object)["label" => "Aggiungi", "icon" => "plus", "button_class" => "confirm btn-xsmall", "link" => DOMAIN."?page=edit&object=Patient&id_user=".$id]
+            );
+            $results = $this->getAnagrafica($obj->id_patient);
+            $section->fields = array();
+            foreach ($results as $result) {
+                array_push($section->fields, $result);
+            }
+            array_push($sections, $section);
+        }
         $bigSection = new stdClass();
         $bigSection->inEditView = true;
         $bigSection->inView = true;
@@ -210,6 +229,20 @@ class UserOBJ extends DBObject
             for ($i = 0; $i < mysqli_num_rows($r); $i++) { 
                 array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"session_start","label"=>"Inizio Sessione","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'session_start', $i)]);
                 array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"session_end","label"=>"Fine Sessione","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'session_end', $i)]);
+            }
+        }
+
+        return $results;
+    }
+
+    public function getAnagrafica($id){
+        $q = "SELECT * FROM patients WHERE id = $id";
+        $r = mysqli_query(DataBase::$mysqli, $q);
+        $results = [];
+        if(mysqli_num_rows($r) > 0){
+            for ($i = 0; $i < mysqli_num_rows($r); $i++) { 
+                array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"name","label"=>"Nome","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'name', $i)]);
+                array_push($results, (object)["visible"=>1,"visible_edit"=>1,"name"=>"surname","label"=>"Cognome","col"=>"4","type"=>"text","value"=> DataBase::getResult($r, 'surname', $i)]);
             }
         }
 
