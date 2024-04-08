@@ -54,7 +54,17 @@ if(isset($_POST['set'])){
                                             <?php if($field->visible_edit == 1){ ?>
                                                 <div class="pg-col pg-col-<?php echo $field->col ?> pg-input-wrapper">
                                                     <label for="<?php echo $field->name ?>"><?php echo $field->label ?></label>
-                                                    <input type="<?php echo $field->type ?>" name="<?php echo $field->name ?>" value="<?php echo $field->value ?>" class="form-input" id="<?php echo $field->name ?>"></input>
+                                                    <?php if($field->type !== "select"){ ?>
+                                                        <input type="<?php echo $field->type ?>" name="<?php echo $field->name ?>" value="<?php echo $field->value ?>" class="form-input" id="<?php echo $field->name ?>"></input>
+                                                    <?php }else{ ?>
+                                                        <select name="<?php echo $field->name ?>" class="form-input" id="<?php echo $field->name ?>">
+                                                        <?php if(is_array($field->value)){ 
+                                                            foreach ($field->value as $key => $value) {  ?>
+                                                                <option value="<?php echo $key ?>"><?php echo $value ?></option>
+                                                        <?php }
+                                                        } ?>
+                                                        </select>
+                                                    <?php } ?>
                                                 </div>
                                             <?php } ?>
                                         <?php } ?>

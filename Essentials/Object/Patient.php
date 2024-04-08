@@ -22,7 +22,7 @@ class PatientOBJ extends DBObject
         $viewObj->hasAdd = true;
         $viewObj->linkAdd = ADMINPATH . "?page=edit&object=" . $this->objectName;
         $viewObj->buttons = array(
-            (object)["label" => "Aggiungi", "icon" => "plus", "button_class" => "confirm btn-small", "link" => DOMAIN."?page=edit&object=".$this->objectName."&id="]
+            (object)["label" => "Aggiungi", "icon" => "plus", "button_class" => "confirm btn-small", "link" => DOMAIN."?page=edit&object=".$this->objectName]
         );
         $viewObj->fields = array(
             (object)['name' => "id", "label" => "ID", "col" => "0", "type" => "text", "type_column" => "int", "print" => 0],
@@ -38,7 +38,9 @@ class PatientOBJ extends DBObject
 
     public function set($params, $returnError = false, $blockInsert = false){
         $message = '';
-        if (strlen($params['name']) && strlen($params['surname'])) {
+        $qCheck = "SELECT * FROM users WHERE id = '".$params['id_user']."' AND id_patient = 0";
+        $rCheck = mysqli_query(DataBase::$mysqli, $qCheck);
+        if (strlen($params['name']) && strlen($params['surname']) && strlen($params['id_user']) && mysqli_num_rows($rCheck) > 0) {
             $message = $this->popolateArray($params, $this->objectName);
         } else {
             if (!strlen($params['name'])) {
@@ -46,6 +48,12 @@ class PatientOBJ extends DBObject
             }
             if (!strlen($params['surname'])) {
                 $message = 'Il cognome è obbligatorio!';
+            }
+            if (!strlen($params['id_user'])) {
+                $message = 'L\'utente è obbligatorio!';
+            }
+            if (mysqli_num_rows($rCheck) == 0) {
+                $message = 'Questo utente è già stato anagrafato';
             }
         }
         return $message;
@@ -85,6 +93,7 @@ class PatientOBJ extends DBObject
         $section->fields = array(
             (object)["visible"=>1,"visible_edit"=>1,"name"=>"name","label"=>"Nome","col"=>"4","type"=>"text","value"=>$this->getProperty($obj, "name")],
             (object)["visible"=>1,"visible_edit"=>1,"name"=>"surname","label"=>"Cognome","col"=>"4","type"=>"text","value"=>$this->getProperty($obj, "surname")],
+            (object)["visible"=>0,"visible_edit"=>1,"name"=>"id_user","label"=>"Utente","col"=>"4","type"=>"select","value"=>$this->getUsers()],
         );
         array_push($sections, $section);
 
@@ -116,5 +125,19 @@ class PatientOBJ extends DBObject
         } else {
             return $default;
         }
+    }
+
+    public function getUsers(){
+        $q = "SELECT id, CONCAT(name, ' ', surname) AS denominazione FROM users WHERE is_admin = 0";
+        $r = mysqli_query(DataBase::$mysqli, $q);
+        $array = [];
+        if(mysqli_num_rows($r) > 0){
+            for($i = 0; $i < mysqli_num_rows($r); $i++){
+                $id = DataBase::getResult($r, 'id', $i);
+                $denominazione = DataBase::getResult($r, 'denominazione', $i);
+                $array[$id] = $denominazione;
+            }
+        }
+        return $array;
     }
 }
