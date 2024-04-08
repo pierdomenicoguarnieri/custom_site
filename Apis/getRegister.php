@@ -18,8 +18,11 @@ if(strlen($name) > 0 && strlen($surname) > 0 && strlen($email) > 0 && strlen($pw
         if(mysqli_num_rows($rSelectToken) > 0){
             $isAdmin = 1;
         }
-        $qInsert = "INSERT INTO users (name, surname, email, pwd, is_admin) VALUES (?,?,?,?,?)";
-        $rInsert = DataBase::executeQueryPrepare($qInsert, 'ssssi', [$name, $surname, $email, md5($pwd), $isAdmin]);
+        $qInsertUserInfo = "INSERT INTO user_info (name, surname) VALUES (?,?)";
+        $rInsertUserInfo = DataBase::executeQueryPrepare($qInsertUserInfo, 'ss', [$name, $surname]);
+        $id_user_info = mysqli_insert_id(DataBase::$mysqli);
+        $qInsert = "INSERT INTO users (email, pwd, is_admin, id_user_info) VALUES (?,?,?,?)";
+        $rInsert = DataBase::executeQueryPrepare($qInsert, 'ssii', [$email, md5($pwd), $isAdmin, $id_user_info]);
         if($rInsert){
             $json->head = true;
             if(mysqli_num_rows($rSelectToken) > 0){

@@ -226,7 +226,7 @@ class DBObject extends stdClass
         }
     }
 
-    public static function getData($q_in = "",$table,$fields,$replace_list = [],$where_conditions = [], $group_by = [], $order_by = [], $limit = ""){
+    public static function getData($q_in = "",$table,$fields,$replace_list = [],$where_conditions = [], $group_by = [], $order_by = [], $limit = "", $type_return = ""){
         if(strlen($q_in) == 0){
             $q = "SELECT ";
             foreach ($fields as $key => $field){
@@ -290,22 +290,26 @@ class DBObject extends stdClass
         }else{
             $q = $q_in;
         }
-        $r = mysqli_query(DataBase::$mysqli, $q);
-        if(mysqli_num_rows($r) > 0){
-            $data = [];
-            for($i = 0; $i < mysqli_num_rows($r); $i++){
-                $array = DataBase::getResultArray($r,$i);
-                $row = [];
-                foreach ($array as $key => $value) {
-                    foreach ($fields as $object) {
-                        if($object->name == $key){
-                            array_push($row, (object)['value' => $value, 'print' => $object->print, 'col' => $object->col]);
+        if($type_return == 'query'){
+            return $q;
+        }elseif(strlen($type_return) == 0){
+            $r = mysqli_query(DataBase::$mysqli, $q);
+            if(mysqli_num_rows($r) > 0){
+                $data = [];
+                for($i = 0; $i < mysqli_num_rows($r); $i++){
+                    $array = DataBase::getResultArray($r,$i);
+                    $row = [];
+                    foreach ($array as $key => $value) {
+                        foreach ($fields as $object) {
+                            if($object->name == $key){
+                                array_push($row, (object)['value' => $value, 'print' => $object->print, 'col' => $object->col]);
+                            }
                         }
                     }
+                    array_push($data,$row);
                 }
-                array_push($data,$row);
             }
+            return $data;
         }
-        return $data;
     }
 }

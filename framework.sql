@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Apr 05, 2024 alle 13:11
+-- Creato il: Apr 08, 2024 alle 15:57
 -- Versione del server: 10.4.32-MariaDB
 -- Versione PHP: 8.2.12
 
@@ -31,19 +31,6 @@ CREATE TABLE `admin_tokens` (
   `id` int(11) NOT NULL,
   `token` varchar(255) DEFAULT NULL,
   `used` tinyint(4) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
-
--- --------------------------------------------------------
-
---
--- Struttura della tabella `patients`
---
-
-CREATE TABLE `patients` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `surname` varchar(255) NOT NULL,
-  `id_anagrafica` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
 -- --------------------------------------------------------
@@ -79,12 +66,22 @@ CREATE TABLE `settings` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `surname` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `pwd` varchar(255) NOT NULL,
   `is_admin` tinyint(4) NOT NULL DEFAULT 0,
-  `id_patient` int(11) NOT NULL DEFAULT 0
+  `id_user_info` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `user_info`
+--
+
+CREATE TABLE `user_info` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=armscii8 COLLATE=armscii8_bin;
 
 --
@@ -95,12 +92,6 @@ CREATE TABLE `users` (
 -- Indici per le tabelle `admin_tokens`
 --
 ALTER TABLE `admin_tokens`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indici per le tabelle `patients`
---
-ALTER TABLE `patients`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -123,6 +114,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indici per le tabelle `user_info`
+--
+ALTER TABLE `user_info`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT per le tabelle scaricate
 --
 
@@ -130,12 +127,6 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT per la tabella `admin_tokens`
 --
 ALTER TABLE `admin_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT per la tabella `patients`
---
-ALTER TABLE `patients`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -154,6 +145,12 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `user_info`
+--
+ALTER TABLE `user_info`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

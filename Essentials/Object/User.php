@@ -26,11 +26,12 @@ class UserOBJ extends DBObject
         );
         $viewObj->fields = array(
             (object)['name' => "id", "label" => "ID", "col" => "0", "type" => "text", "type_column" => "int", "print" => 0],
-            (object)['name' => "name", "label" => "Nome", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
-            (object)['name' => "surname", "label" => "Cognome", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
-            (object)['name' => "email", "label" => "Email", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1]
+            (object)['name' => "name", "label" => "Nome", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "surname", "label" => "Cognome", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "email", "label" => "Email", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "is_admin", "label" => "Admin", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1]
         );
-        $replace = ["is_admin" => "IF(is_admin = 1, 'SI', 'NO') AS is_admin,"];
+        $replace = ["name" => "(SELECT name FROM user_info WHERE user_info.id = id_user_info) AS name", "surname" => "(SELECT surname FROM user_info WHERE user_info.id = id_user_info) AS surname","is_admin" => "IF(is_admin = 1, 'SI', 'NO') AS is_admin"];
         $where_q = ["is_admin != 0"];
         $where = [
             [
@@ -47,7 +48,8 @@ class UserOBJ extends DBObject
         $order_by = [
             (object)["string" => "id", "condition" => "DESC"]
         ];
-        $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,'',$where_q);
+        $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,$replace,[]);
+        $viewObj->query = $this->getData("",$this->table,$viewObj->fields,$replace,[],[],[],"","query");
         $viewObj->replace = $replace;
         $viewObj->table = $this->table;
         return $viewObj;
@@ -55,17 +57,11 @@ class UserOBJ extends DBObject
 
     public function set($params, $returnError = false, $blockInsert = false){
         $message = '';
-        if (strlen($params['name']) && strlen($params['surname']) && strlen($params['email'])) {
+        if (strlen($params['email'])) {
             $message = $this->popolateArray($params, $this->objectName);
         } else {
-            if (!strlen($params['name'])) {
-                $message = 'Il nome è obbligatorio!';
-            }
-            if (!strlen($params['surname'])) {
-                $message = 'Il cognome è obbligatorio!';
-            }
             if (!strlen($params['email'])) {
-                $message = 'La Mail è obbligatoria!';
+                $message = 'La mail è obbligatoria!';
             }
         }
         return $message;

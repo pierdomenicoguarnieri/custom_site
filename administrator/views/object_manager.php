@@ -64,7 +64,28 @@ if(count($where) > 0){
     <?php foreach($objectsOBJ as $object){
         $listView = $object->getListView($GLOBALS['CURRENT_USER']->id);
         if($filter){
-            $datas = $object->getData("",$listView->table,$listView->fields,$listView->replace,$where);
+            $query = "SELECT * FROM ($listView->query) AS t123";
+            if(count($where) > 0){
+                $query .= " WHERE ";
+                foreach($where as $key => $condition){
+                    if(is_array($condition)){
+                        $query .= " (";
+                        foreach ($condition as $key_2 => $object) {
+                            if(is_object($object)){
+                                $is_last = $key_2 == count($condition) - 1 ? ")" : "";
+                                $query .= " (".$object->string.")  $is_last $object->condition ";
+                            }
+                        }
+                    }elseif(is_object($condition)){
+                        $object_condition = isset($condition->condition) ? $condition->condition : "";
+                        $query .= " $condition->string $object_condition ";
+                    }else{
+                        $separator = $key == count($where) - 1 ? "" : "AND";
+                        $query .= " $condition $separator ";
+                    }
+                }
+            }
+            $datas = $object->getData($query,$listView->table,$listView->fields);
         }else{
             $datas = $listView->datas;
         }?>

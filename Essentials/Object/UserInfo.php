@@ -1,8 +1,8 @@
 <?php
-class PatientOBJ extends DBObject
+class UserInfoOBJ extends DBObject
 {
-    public $objectName = "Patient";
-    public $icon = "patient";
+    public $objectName = "UserInfo";
+    public $icon = "UserInfo";
     public $label = "Pazienti";
     public $filterColor = "orange";
     public $filterColumn = "name";
@@ -10,9 +10,9 @@ class PatientOBJ extends DBObject
 
 
     public function __construct(){
-        parent::__construct('patients');
+        parent::__construct('user_info');
         $this->noShowFields = array();
-        $this->TagLogName = "Patient";
+        $this->TagLogName = "UserInfo";
     }
 
     public function getListView($currentLoggedUser){
@@ -26,19 +26,21 @@ class PatientOBJ extends DBObject
         );
         $viewObj->fields = array(
             (object)['name' => "id", "label" => "ID", "col" => "0", "type" => "text", "type_column" => "int", "print" => 0],
-            (object)['name' => "name", "label" => "Nome", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
-            (object)['name' => "surname", "label" => "Cognome", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
-            (object)['name' => "email", "label" => "Email", "col" => "4", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "name", "label" => "Nome", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "surname", "label" => "Cognome", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "email", "label" => "Email", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
+            (object)['name' => "is_admin", "label" => "Admin", "col" => "3", "type" => "text", "type_column" => "varchar", "print" => 1],
         );
-        $replace = ["email" => "(SELECT email FROM users WHERE users.id_patient = patients.id) AS email"];
+        $replace = ["email" => "(SELECT email FROM users WHERE users.id_user_info = user_info.id) AS email", "is_admin" => "(SELECT IF(is_admin = 1, 'SI', 'NO') FROM users WHERE users.id_user_info = user_info.id) AS is_admin"];
         $viewObj->datas = $this->getData("",$this->table,$viewObj->fields,$replace);
+        $viewObj->query = $this->getData("",$this->table,$viewObj->fields,$replace,[],[],[],"","query");
         $viewObj->table = $this->table;
         return $viewObj;
     }
 
     public function set($params, $returnError = false, $blockInsert = false){
         $message = '';
-        $qCheck = "SELECT * FROM users WHERE id = '".$params['id_user']."' AND id_patient = 0";
+        $qCheck = "SELECT * FROM users WHERE id = '".$params['id_user']."' AND id_UserInfo = 0";
         $rCheck = mysqli_query(DataBase::$mysqli, $qCheck);
         if (strlen($params['name']) && strlen($params['surname']) && strlen($params['id_user']) && mysqli_num_rows($rCheck) > 0) {
             $message = $this->popolateArray($params, $this->objectName);
